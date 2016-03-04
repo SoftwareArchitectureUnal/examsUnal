@@ -5,7 +5,10 @@
  */
 package co.unal.examsUnal.Presentation.Servlets;
 
+import co.unal.examsUnal.BusinessLogic.Controller.User.ExamController;
 import co.unal.examsUnal.BusinessLogic.Controller.User.UserController;
+import co.unal.examsUnal.DataAccess.DAO.ExamDAO;
+import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.User;
 import java.io.IOException;
 import java.util.Collection;
@@ -33,7 +36,11 @@ public class LoginServlet extends HttpServlet {
                 req.getSession().setAttribute("admin", user.getIdRole().getRoleId());
                 req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
             }else{
+                ExamController examController = new ExamController();
+                Collection<Exam> exmas = examController.findExamsUser(username);
                 req.getSession().setAttribute("user", user);
+                req.getSession().setAttribute("totalNotifications",exmas.size());
+                req.getSession().setAttribute("notifications",exmas);
                 req.getRequestDispatcher("/user/index.jsp").forward(req, resp);
             }
         }else{

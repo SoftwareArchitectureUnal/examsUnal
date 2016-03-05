@@ -11,6 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/signUp.css">
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
     </head>
     <body>
         <c:if test="${user!=null}">

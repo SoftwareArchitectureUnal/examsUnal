@@ -53,6 +53,24 @@
         <url-pattern>/ShowQuestionServlet</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>ShowQuestionDeleteServlet</servlet-name>
+        <servlet-class>co.unal.examsUnal.Presentation.Servlets.ShowQuestionDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowQuestionDeleteServlet</servlet-name>
+        <url-pattern>/ShowQuestionDeleteServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteQuestionServlet</servlet-name>
+        <servlet-class>co.unal.examsUnal.Presentation.Servlets.DeleteQuestionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteQuestionServlet</servlet-name>
+        <url-pattern>/DeleteQuestionServlet</url-pattern>
+    </servlet-mapping>
+    
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

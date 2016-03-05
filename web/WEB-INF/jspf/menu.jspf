@@ -53,7 +53,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="${pageContext.request.contextPath}/ShowQuestionServlet">Show questions</a></li>
                                 <li><a href="/ExamsUnal/admin/addQuestions.jsp">Add questions</a></li>
-                                <li><a href="/ExamsUnal/admin/deleteQuestions.jsp">Delete questions</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ShowQuestionDeleteServlet">Delete questions</a></li>
                             </ul>
                         </li>
                             <li><a href="${pageContext.request.contextPath}/LogoutServlet">Log out</a></li>

@@ -25,5 +25,9 @@ public class QuestionController {
         Collection<Question> questions = questionDAO.findAllQuestions();
         return questions; 
     }
+    public void deleteQuestion(String questionId){
+        QuestionDAO questionDAO = new QuestionDAO();
+        questionDAO.deleteQuestion(questionId);
+    }
     
 }

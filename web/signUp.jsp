@@ -21,6 +21,7 @@
         <%@include file="/WEB-INF/jspf/menu.jspf" %>
         <c:if test="${signUp!=null}" >
             <div class="alert alert-danger">
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong>Error!</strong> No se pudo hacer el registro
             </div>
         </c:if>

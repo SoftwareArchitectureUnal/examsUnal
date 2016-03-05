@@ -30,7 +30,7 @@
                     <li><a href="/ExamsUnal/index.jsp">${user.getUserId()}</a></li>
                 </c:if>
                 <c:if test="${admin!=null}">
-                    <li><a href="/Exams/index.jsp">Admin</a></li>
+                    <li><a href="/ExamsUnal/index.jsp">Admin</a></li>
                 </c:if>
                 
                 <li><a href="/ExamsUnal/index.jsp">Home</a></li>
@@ -48,6 +48,14 @@
                         <li><a href="${pageContext.request.contextPath}/LogoutServlet">Log out</a></li>
                     </c:when>
                    <c:when test="${admin!=null}">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Questions</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="${pageContext.request.contextPath}/ShowQuestionServlet">Show questions</a></li>
+                                <li><a href="/ExamsUnal/admin/addQuestions.jsp">Add questions</a></li>
+                                <li><a href="/ExamsUnal/admin/deleteQuestions.jsp">Delete questions</a></li>
+                            </ul>
+                        </li>
                             <li><a href="${pageContext.request.contextPath}/LogoutServlet">Log out</a></li>
                    </c:when>
                    <c:when test="${user==null && admin==null}">

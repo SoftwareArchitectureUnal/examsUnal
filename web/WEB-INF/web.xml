@@ -35,6 +35,23 @@
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/SignUpServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddQuestionServlet</servlet-name>
+        <servlet-class>co.unal.examsUnal.Presentation.Servlets.AddQuestionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddQuestionServlet</servlet-name>
+        <url-pattern>/AddQuestionServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ShowQuestionServlet</servlet-name>
+        <servlet-class>co.unal.examsUnal.Presentation.Servlets.ShowQuestionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowQuestionServlet</servlet-name>
+        <url-pattern>/ShowQuestionServlet</url-pattern>
+    </servlet-mapping>
     
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

@@ -45,7 +45,7 @@ CREATE TABLE `ExamByQuestion`(
 	PRIMARY KEY(`examByQuestionId`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `ResultExam`(
-	`resultExamId` Int NOT NULL,
+	`resultExamId` Int NOT NULL AUTO_INCREMENT,
 	`idUser` varchar(255) NOT NULL,
 	`idExam` int not null,
 	`approved` int not nULL,

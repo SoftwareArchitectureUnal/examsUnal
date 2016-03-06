@@ -68,6 +68,7 @@ public class ExamRegisterController {
            myRelation.setApproved(0);
            myRelation.setStatus(0);
            
+           //myRelation.setResultExamId(System.currentTimeMillis());
            myRelation.setIdExam(exam);
            myRelation.setIdUser(user);
            

@@ -58,7 +58,6 @@
                         auxDate = exam.getRealizationDate();
                         if ( auxDate.compareTo(new Date()) == -1) continue;
                         flag = (Boolean)myPair.getValue();
-                        System.out.println("::: "+exam.getExamId()+" , "+flag);
                         out.println("<tr>");
                         out.println("<td>"+exam.getName()+"               "+"</td>");
                         out.println("<td>"+exam.getDescription()+"              "+"</td>");

@@ -20,14 +20,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author AndresGutierrez
+ * @author yeisondavid
  */
 @Entity
-@Table(name = "ExamByQuestion")
+@Table(name = "exambyquestion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ExamByQuestion.findAll", query = "SELECT e FROM ExamByQuestion e"),
-    @NamedQuery(name = "ExamByQuestion.findByExamByQuestionId", query = "SELECT e FROM ExamByQuestion e WHERE e.examByQuestionId = :examByQuestionId")})
+    @NamedQuery(name = "Exambyquestion.findAll", query = "SELECT e FROM Exambyquestion e"),
+    @NamedQuery(name = "Exambyquestion.findByExamByQuestionId", query = "SELECT e FROM Exambyquestion e WHERE e.examByQuestionId = :examByQuestionId")})
 public class ExamByQuestion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -96,7 +96,7 @@ public class ExamByQuestion implements Serializable {
 
     @Override
     public String toString() {
-        return "co.unal.examsUnal.DataAccess.Entity.ExamByQuestion[ examByQuestionId=" + examByQuestionId + " ]";
+        return "co.unal.examsUnal.DataAccess.Entity.Exambyquestion[ examByQuestionId=" + examByQuestionId + " ]";
     }
     
 }

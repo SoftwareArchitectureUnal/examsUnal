@@ -6,6 +6,7 @@
 package co.unal.examsUnal.DataAccess.DAO;
 
 import co.unal.examsUnal.DataAccess.Entity.Exam;
+import co.unal.examsUnal.DataAccess.Entity.ResultExam;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
@@ -30,6 +31,17 @@ public class ExamDAO {
         }catch(Exception e){
             //System.out.println(e.toString());
             return new ArrayList<Exam>();
+        }
+    }
+    
+    public Collection<Exam> findAllExams() {
+        EntityManager em = emf.createEntityManager();
+        Query query;
+        try{
+            query = em.createNamedQuery("Exam.findAll");
+            return (Collection<Exam>) query.getResultList();
+        }catch(Exception e){
+            return null;
         }
     }
 }

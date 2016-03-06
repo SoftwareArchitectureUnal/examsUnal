@@ -31,7 +31,6 @@ public class ResultExamDAO {
         }
         catch(Exception e)
         {
-            System.out.println("::::::: Here");
             return null;
         }
     }
@@ -52,13 +51,23 @@ public class ResultExamDAO {
     }
     public ResultExam insert(ResultExam relation){
         System.out.println("::: in insert");
+        System.out.println(relation.getIdExam().getExamId());
+        System.out.println(relation.getIdUser().getUserId());
         EntityManager em = emf.createEntityManager();
+        
         em.getTransaction().begin();
         try{
+            System.out.println("1");
             em.persist(relation);
+            System.out.println("2");
+            relation.getIdExam().getResultExamCollection().add(relation);
+            relation.getIdUser().getResultExamCollection().add(relation);
             em.getTransaction().commit();
+            em.merge(relation.getIdExam());
+            em.merge(relation.getIdUser());
         }catch(Exception e){
             em.getTransaction().rollback();
+            System.out.println("fail");
             return null;
         }finally{
             em.close();

@@ -44,4 +44,17 @@ public class ExamDAO {
             return null;
         }
     }
+
+     public Exam getExam(int idExam)
+    {
+        EntityManager em = emf.createEntityManager();
+        Query query;
+        try{
+            query = em.createNamedQuery("Exam.findAll");
+            return (Exam)query.getResultList().get(0);
+        }catch(Exception e){
+            return null;
+        }
+        
+    }
 }

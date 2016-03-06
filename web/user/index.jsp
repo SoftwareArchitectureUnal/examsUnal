@@ -4,6 +4,8 @@
     Author     : AndresGutierrez
 --%>
 
+<%@page import="co.unal.examsUnal.BusinessLogic.Controller.User.CertificationController"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="co.unal.examsUnal.BusinessLogic.Controller.User.ExamRegisterController"%>
 <%@page import="co.unal.examsUnal.DataAccess.Entity.User"%>
 <%@page import="co.unal.examsUnal.DataAccess.Entity.Exam"%>
@@ -78,7 +80,31 @@
             <button type = "submit" class = "btn btn-success" name = "btsave">Guardar</button>
         </form>   
         
-       
+        <br><br><br>   
+        <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Certificados</div>
+                <!-- Table -->
+                <table class="table">        
+                <% User myUser = (User)session.getAttribute("user"); 
+                    ArrayList<Exam> myExams = (ArrayList)CertificationController.getPasExamsofUser(myUser.getUserId());
+                    out.print("<tr>");
+                        out.print("<th>Exámenes</th>");
+                    out.print("</tr>");
+                    for( int i = 0; i < myExams.size(); i++ )
+                    {
+                       out.print("<tr>");
+                       out.print("<td>"+(myExams.get(i).getName())+"</th>");
+                       out.print("<td> <form action=\"./CertificationServlet\" method=\"post\"> "
+                               + "<button type = \"submit\" class = \"btn btn-success\">Certificado</button>"
+                               + "</form> </th>");
+                       out.print("</tr>");
+                    }
+                %>
+                
+                
+                </table>
+        </div>        
         <%@include file="/WEB-INF/jspf/footer.jspf"%>
     </body>
 </html>

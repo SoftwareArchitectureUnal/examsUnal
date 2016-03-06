@@ -45,7 +45,7 @@ public class ExamDAO {
         }
     }
 
-     public Exam getExam(int idExam)
+    public Exam getExam(int idExam)
     {
         EntityManager em = emf.createEntityManager();
         Query query;
@@ -57,4 +57,67 @@ public class ExamDAO {
         }
         
     }
+    
+    public Exam findById( int id ) {
+        EntityManager em = emf.createEntityManager();
+        Query query;
+        try{
+            query = em.createNamedQuery("Exam.findByExamId").setParameter("examId", id);
+            return (Exam)query.getSingleResult();
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+     
+    public Exam insert(Exam exam){
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try{
+            em.persist(exam);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            return null;
+        }finally{
+            em.close();
+        }
+        return exam;
+    }
+    
+    public Exam update(Exam exam){
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try{
+            Exam exUpdate = em.find(Exam.class, exam.getExamId());
+            exUpdate.setName(exam.getName());
+            exUpdate.setExpeditionDate(exam.getExpeditionDate());
+            exUpdate.setRealizationDate(exam.getRealizationDate());
+            exUpdate.setCertificationDate(exam.getCertificationDate());
+            exUpdate.setDescription(exam.getDescription());
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            return null;
+        }finally{
+            em.close();
+        }
+        return exam;
+    }
+    
+    public boolean deleteExam(Exam exam) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try{
+            exam = em.merge(exam);
+            em.remove(exam);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }finally{
+            em.close();
+        }
+        return true;
+    }
+    
 }

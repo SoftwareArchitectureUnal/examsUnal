@@ -49,6 +49,7 @@ public class ResultExamDAO {
         }
         return true;
     }
+    
     public ResultExam insert(ResultExam relation){
         System.out.println("::: in insert");
         System.out.println(relation.getIdExam().getExamId());
@@ -73,5 +74,16 @@ public class ResultExamDAO {
             em.close();
         }
         return relation;
+    }
+    
+    public Collection<ResultExam> findAllRelation(){
+        EntityManager em = emf.createEntityManager();
+        Query query;
+        try{
+            query = em.createNamedQuery("ResultExam.findAll");
+            return (Collection<ResultExam>) query.getResultList();
+        }catch(Exception e){
+            return null;
+        }
     }
 }

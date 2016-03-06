@@ -5,8 +5,10 @@
  */
 package co.unal.examsUnal.Presentation.Servlets;
 
+import co.unal.examsUnal.DataAccess.Entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,14 +36,20 @@ public class CertificationServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.getSession().getAttribute("user");
+            String nameUser = ((User)request.getSession().getAttribute("user")).getName();
+            String nameExam = (String)request.getParameter("nameExam");
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet CertificationServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CertificationServlet at " + request.getContextPath() + "</h1>");
+            out.println("<div align=center>");
+            out.println("<h1> <br><br><br> ExamenesUNAL </h1>");
+            out.println("<h1> <br><br><br> CERTIFICADO DE APROBACIÓN </h1><br><br><br><br>");   
+            out.println("<h1> certificamos que: "+ nameUser+" </h1>"); 
+            out.println("<h1> ha aprobado el examen: "+nameExam+"</h1>");
+            out.println("</div>");
             out.println("</body>");
             out.println("</html>");
         }

@@ -96,7 +96,8 @@
                        out.print("<tr>");
                        out.print("<td>"+(myExams.get(i).getName())+"</th>");
                        out.print("<td> <form action=\"./CertificationServlet\" method=\"post\"> "
-                               + "<button type = \"submit\" class = \"btn btn-success\">Certificado</button>"
+                               + "<input type=\"hidden\" name=\"nameExam\" value=\""+myExams.get(i).getName()+"\">"
+                               + "<button type = \"submit\" class = \"btn btn-success\" name=\"bt\" >Certificado</button>"
                                + "</form> </th>");
                        out.print("</tr>");
                     }

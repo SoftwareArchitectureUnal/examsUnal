@@ -50,7 +50,7 @@
                 <input type="text" id="inputName" name="inputName" class="form-control"
                        placeholder="Nombre" required>
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" name="inputPassword" onchange="checkPassword()" class="form-control"
+                <input type="password" id="inputPassword" name="inputPassword" class="form-control"
                        placeholder="Contraseña" required>
                 <label for="inputPassword" class="sr-only">Repeat Password></label>
                 <input type="password" id="inputRepPassword" name="inputRepPassword" onchange="checkPassword()" class="form-control"

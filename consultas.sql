@@ -1,103 +1,147 @@
-/*user*/
+DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `Role`;
+DROP TABLE IF EXISTS `ExamByQuestion`;
+DROP TABLE IF EXISTS `ResultExam`;
+DROP TABLE IF EXISTS `Question`;
+DROP TABLE IF EXISTS `Exam`;
 
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356024", "Alejandro Arias", "huaariasza@unal.edu.co", "1", "89022261887", "admin");
+CREATE TABLE `Role`(
+    `roleId` varchar(255) NOT NULL,
+    `description` varchar(255) NOT NULL,
+    PRIMARY KEY(`roleId`)
+)ENGINE = InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `User` (
+    `userId` varchar (255) NOT NULL,
+    `name` varchar(255) NOT NULL,
+    `email` varchar(255) NOT NULL,
+    `gender` int NOT NULL,
+    `password` varchar(255) NOT NULL,
+    `idRole` varchar(255) NOT NULL,
+    FOREIGN KEY(idRole) REFERENCES ROLE(roleId) ON DELETE CASCADE,
+    PRIMARY KEY(`userId`) 
+)ENGINE = InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `Exam`(
+	`examId` INT AUTO_INCREMENT,
+	`name` varchar(255) NOT NULL UNIQUE,
+	`realizationDate` date NOT NULL,
+	`description` varchar(255) NOT NULL,
+	`certificationDate` date,
+	`expeditionDate` date,
+	PRIMARY KEY(`examId`)
 
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356025", "Alejandro Arias", "huaariasza@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356026", "Hugo Arias", "huaariasza@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356027", "Hugo Alejandro Arias", "huaariasza@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356028", "Hugo Alejandro Arias Zamora", "huaariasza@unal.edu.co", "1", "123456", "user");
+)ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+CREATE TABLE `Question`(
+	`questionId` varchar(255) NOT NULL,
+	`category` varchar(255) NOT NULL,
+	`description` varchar(255) NOT NULL,
+	PRIMARY KEY(`questionId`)
+)ENGINE = InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `ExamByQuestion`(
+	`examByQuestionId` int NOT NULL,
+	`idQuestion` varchar(255) NOT NULL,
+	`idExam` int NOT NULL,
+	FOREIGN KEY(idQuestion) REFERENCES Question(questionId),
+	FOREIGN KEY(idExam) REFERENCES Exam(examId),
+	PRIMARY KEY(`examByQuestionId`)
+)ENGINE = InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `ResultExam`(
+	`resultExamId` Int NOT NULL AUTO_INCREMENT,
+	`idUser` varchar(255) NOT NULL,
+	`idExam` int not null,
+	`approved` int not nULL,
+	`status` int not null,
+	FOREIGN KEY(idUser) REFERENCES User(userId),
+	FOREIGN KEY(idExam) REFERENCES Exam(examId),
+	PRIMARY KEY(`resultExamId`)
+)ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356029", "Andrés René Gutierrez", "andresr@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356030", "Andrés Gutierrez", "andresr@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356031", "René Gutierrez", "andresr@unal.edu.co", "1", "123456", "user");
-
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356032", "Yeison García", "yeisong@unal.edu.co", "1", "123456", "user");
-
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356033", "Fernando Bello", "andresr@unal.edu.co", "1", "123456", "user");
-
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356034", "Daniel Fernando Cubides Cespedes", "danielf@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356035", "Fernando Cubides Cespedes", "danielf@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356036", "Daniel Cubides Cespedes", "danielf@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356037", "Daniel Fernando Cubides", "danielf@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356038", "Fernando Cubides", "danielf@unal.edu.co", "1", "123456", "user");
-Insert into user (userId, name, email, gender, password, idRole) values ("1022356039", "Fernando Cespedes", "danielf@unal.edu.co", "1", "123456", "user");
-
-
-/*resultexam*/
-
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356025", 1000, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356026", 1000, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356027", 1000, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356028", 1000, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356029", 1000, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356030", 1000, 1, 1);
-
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356025", 1001, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356026", 1001, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356027", 1001, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356028", 1001, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356029", 1001, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356030", 1001, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356031", 1001, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356032", 1001, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356033", 1001, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356034", 1001, 0, 1);
-
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356025", 1002, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356026", 1002, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356027", 1002, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356028", 1002, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356029", 1002, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356030", 1002, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356031", 1002, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356032", 1002, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356033", 1002, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356034", 1002, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356035", 1002, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356036", 1002, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356037", 1002, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356038", 1002, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356039", 1002, 1, 1);
-
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356025", 1003, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356026", 1003, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356027", 1003, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356028", 1003, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356029", 1003, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356030", 1003, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356031", 1003, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356032", 1003, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356033", 1003, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356034", 1003, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356035", 1003, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356036", 1003, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356037", 1003, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356038", 1003, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356039", 1003, 1, 1);
-
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356025", 1004, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356026", 1004, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356027", 1004, 0, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356028", 1004, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356029", 1004, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356030", 1004, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356031", 1004, 1, 1);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356032", 1004, 1, 1);
-
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356025", 1005, 0, 0);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356026", 1005, 0, 0);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356027", 1005, 0, 0);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356028", 1005, 0, 0);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356029", 1005, 0, 0);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356030", 1005, 0, 0);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356031", 1005, 0, 0);
-Insert Into resultexam (idUser, idExam, approved, status) values ("1022356032", 1005, 0, 0);
-
-
-
-/*role*/
+/*roles*/
 Insert into role (roleId, description) values ("admin", "Administrador");
 Insert into role (roleId, description) values ("user", "Usuario");
+
+
+/* Usuarios */
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('admin', 'Administrador', 'admin@unal.edu.co', 1, 'password', 'admin');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('yeison', 'Yeison David Garcia Gomez', 'yeison@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('andres', 'Andres Rene Gutierrez Tiuso', 'andres@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('alejandro', 'Hugo Alejandro Arias Zamora', 'alejandro@unal.edu.co', 1, 'password', 'user');
+
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('luis', 'Luis Fernando Bello Ocampo', 'luis@unal.edu.co', 1, 'password', 'user');
+
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user1', 'User1', 'user1@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user2', 'User2', 'user2@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user3', 'User3', 'user3@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user4', 'User4', 'user4@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user5', 'User5', 'user5@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user6', 'User6', 'user6@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user7', 'User7', 'user7@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user8', 'User8', 'user8@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user9', 'User9', 'user9@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user10', 'User10', 'user10@unal.edu.co', 1, 'password', 'user');
+
+
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user11', 'User11', 'user11@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user12', 'User12', 'user12@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user13', 'User13', 'user13@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user14', 'User14', 'user14@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user15', 'User15', 'user15@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user16', 'User16', 'user16@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user17', 'User17', 'user17@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user18', 'User18', 'user18@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user19', 'User19', 'user19@unal.edu.co', 1, 'password', 'user');
+
+INSERT INTO examsdb.`user` (`userId`, `name`, email, gender, password, `idRole`) 
+	VALUES ('user20', 'User20', 'user20@unal.edu.co', 1, 'password', 'user');
+
+
 
 /*Exams*/
 
@@ -109,3 +153,72 @@ Insert Into exam (name, expeditionDate, realizationDate, certificationDate, desc
 Insert Into exam (name, expeditionDate, realizationDate, certificationDate, description) values("Analista de bases de datos", '2016-2-15', '2016-3-05', '2016-3-15', "Examen para analista de bases de datos oracle");
 
 
+
+
+Insert Into resultexam (idUser, idExam, approved, status) values ("yeison", 1000, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user5", 1000, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user1", 1000, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user2", 1000, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user3", 1000, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user4", 1000, 1, 1);
+
+Insert Into resultexam (idUser, idExam, approved, status) values ("yeison", 1001, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user1", 1001, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user2", 1001, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user3", 1001, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user4", 1001, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user5", 1001, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user6", 1001, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user7", 1001, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user8", 1001, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user9", 1001, 0, 1);
+
+Insert Into resultexam (idUser, idExam, approved, status) values ("yeison", 1002, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user2", 1002, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user3", 1002, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user4", 1002, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user5", 1002, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user6", 1002, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user7", 1002, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user8", 1002, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user9", 1002, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user10", 1002, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user11", 1002, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user12", 1002, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user13", 1002, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user14", 1002, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user15", 1002, 1, 1);
+
+Insert Into resultexam (idUser, idExam, approved, status) values ("user1", 1003, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user2", 1003, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user3", 1003, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user4", 1003, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user5", 1003, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user6", 1003, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user7", 1003, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user8", 1003, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user9", 1003, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user10", 1003, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user11", 1003, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user12", 1003, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user13", 1003, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user14", 1003, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user15", 1003, 1, 1);
+
+Insert Into resultexam (idUser, idExam, approved, status) values ("user1", 1004, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user2", 1004, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user3", 1004, 0, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user4", 1004, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user5", 1004, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user6", 1004, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user7", 1004, 1, 1);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user8", 1004, 1, 1);
+
+Insert Into resultexam (idUser, idExam, approved, status) values ("user1", 1005, 0, 0);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user2", 1005, 0, 0);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user3", 1005, 0, 0);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user4", 1005, 0, 0);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user5", 1005, 0, 0);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user6", 1005, 0, 0);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user7", 1005, 0, 0);
+Insert Into resultexam (idUser, idExam, approved, status) values ("user8", 1005, 0, 0);

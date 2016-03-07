@@ -10,6 +10,7 @@ import co.unal.examsUnal.DataAccess.DAO.ResultExamDAO;
 import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.ResultExam;
 import co.unal.examsUnal.DataAccess.Entity.User;
+import co.unal.examsUnal.Utilities.Util.Pair;
 import java.util.Collection;
 
 
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.TreeSet;
-import javafx.util.Pair;
+
 
 
 /**

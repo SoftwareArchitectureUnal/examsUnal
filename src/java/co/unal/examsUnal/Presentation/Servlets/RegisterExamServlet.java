@@ -8,11 +8,11 @@ package co.unal.examsUnal.Presentation.Servlets;
 import co.unal.examsUnal.BusinessLogic.Controller.User.ExamRegisterController;
 import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.User;
+import co.unal.examsUnal.Utilities.Util.Pair;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Iterator;
-import javafx.util.Pair;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -107,5 +107,7 @@ public class RegisterExamServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    
 
 }

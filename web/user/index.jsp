@@ -4,13 +4,14 @@
     Author     : AndresGutierrez
 --%>
 
+<%@page import="co.unal.examsUnal.Utilities.Util.Pair"%>
 <%@page import="co.unal.examsUnal.BusinessLogic.Controller.User.CertificationController"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="co.unal.examsUnal.BusinessLogic.Controller.User.ExamRegisterController"%>
 <%@page import="co.unal.examsUnal.DataAccess.Entity.User"%>
 <%@page import="co.unal.examsUnal.DataAccess.Entity.Exam"%>
 <%@page import="java.util.Date"%>
-<%@page import="javafx.util.Pair"%>
+
 <%@page import="java.util.Collection"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

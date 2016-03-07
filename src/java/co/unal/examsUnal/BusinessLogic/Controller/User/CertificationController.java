@@ -32,7 +32,7 @@ public class CertificationController {
             auxRelation = (ResultExam)iter.next();
             if ( auxRelation.getApproved() == 0) continue;
             idExam = auxRelation.getIdExam().getExamId();
-            result.add(myExamsDAO.getExam(idExam));
+            result.add(myExamsDAO.findById(idExam));
         }
         return result;
     }

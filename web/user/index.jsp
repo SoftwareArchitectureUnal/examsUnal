@@ -96,8 +96,10 @@
                     out.print("<tr>");
                         out.print("<th>Exámenes</th>");
                     out.print("</tr>");
+                    
                     for( int i = 0; i < myExams.size(); i++ )
                     {
+     
                        out.print("<tr>");
                        out.print("<td>"+(myExams.get(i).getName())+"</th>");
                        out.print("<td> <form action=\"./CertificationServlet\" method=\"post\"> "

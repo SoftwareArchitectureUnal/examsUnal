@@ -30,6 +30,7 @@ public class CertificationController {
         while( iter.hasNext())
         {
             auxRelation = (ResultExam)iter.next();
+            if ( auxRelation.getApproved() == 0) continue;
             idExam = auxRelation.getIdExam().getExamId();
             result.add(myExamsDAO.getExam(idExam));
         }

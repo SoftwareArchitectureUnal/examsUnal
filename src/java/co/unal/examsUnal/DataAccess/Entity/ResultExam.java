@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author yeisondavid
+ * @author AndresGutierrez
  */
 @Entity
-@Table(name = "resultexam")
+@Table(name = "ResultExam")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ResultExam.findAll", query = "SELECT r FROM ResultExam r"),
@@ -48,7 +48,7 @@ public class ResultExam implements Serializable {
     @NotNull
     @Column(name = "status")
     private int status;
-    @JoinColumn(name = "idUser", referencedColumnName = "userId")
+    @JoinColumn(name = "idUser", referencedColumnName = "idAuthentication")
     @ManyToOne(optional = false)
     private User idUser;
     @JoinColumn(name = "idExam", referencedColumnName = "examId")

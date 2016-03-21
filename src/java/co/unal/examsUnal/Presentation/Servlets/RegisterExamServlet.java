@@ -41,7 +41,7 @@ public class RegisterExamServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             User myUser = (User)request.getSession().getAttribute("user");
-            String myIdUser = myUser.getUserId();
+            String myIdUser = myUser.getIdAuthentication();
             Exam auxExam;
             String value;
             Boolean flag;

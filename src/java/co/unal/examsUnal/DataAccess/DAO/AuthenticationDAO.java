@@ -6,7 +6,6 @@
 package co.unal.examsUnal.DataAccess.DAO;
 
 import co.unal.examsUnal.DataAccess.Entity.Authentication;
-import co.unal.examsUnal.DataAccess.Entity.Role;
 import co.unal.examsUnal.DataAccess.Entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,40 +15,34 @@ import javax.persistence.Persistence;
  *
  * @author AndresGutierrez
  */
-public class UserDAO {
+public class AuthenticationDAO {
     public EntityManagerFactory emf = 
             Persistence.createEntityManagerFactory("ExamsUnalPU");
-    
-    public User persist(User user,Role role,Authentication authentication){
+    public Authentication persist(Authentication authentication){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try{
-            em.persist(user);
-            user.setIdRole(role);
-            role.getUserCollection().add(user);
-            authentication.setUser(user);
-            em.merge(role);
-            em.merge(authentication);
+            em.persist(authentication);
             em.getTransaction().commit();
         }catch(Exception e){
             em.getTransaction().rollback();
-            user = null;
+            authentication = null;
         }finally{
             em.close();
-            return user;
+            return authentication;
         }
     }
-    public User findUserByUserId(String userId){
+    public Authentication findAutenticationByID(String authenticationId){
         EntityManager em = emf.createEntityManager();
-        User user = null;
+        Authentication authentication = null;
         try{
-            user = em.createNamedQuery("User.findByIdAuthentication",User.class)
-                    .setParameter("idAuthentication", userId)
+            authentication = em.createNamedQuery("Authentication.findByAuthenticationId",
+                    Authentication.class)
+                    .setParameter("authenticationId", authenticationId)
                     .getSingleResult();
         }catch(Exception e){}
         finally{
-            return user;
+            return authentication;
         }
     }
-    
 }

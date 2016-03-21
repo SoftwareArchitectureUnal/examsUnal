@@ -27,7 +27,7 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <c:if test="${user!=null}">
-                    <li><a href="${pageContext.request.contextPath}/index.jsp">${user.getUserId()}</a></li>
+                    <li><a href="${pageContext.request.contextPath}/index.jsp">${user.getIdAuthentication()}</a></li>
                 </c:if>
                 <c:if test="${admin!=null}">
                     <li><a href="${pageContext.request.contextPath}/index.jsp">Admin</a></li>

@@ -5,8 +5,10 @@
  */
 package co.unal.examsUnal.BusinessLogic.Controller.User;
 
+import co.unal.examsUnal.DataAccess.DAO.AuthenticationDAO;
 import co.unal.examsUnal.DataAccess.DAO.RoleDAO;
 import co.unal.examsUnal.DataAccess.DAO.UserDAO;
+import co.unal.examsUnal.DataAccess.Entity.Authentication;
 import co.unal.examsUnal.DataAccess.Entity.Role;
 import co.unal.examsUnal.DataAccess.Entity.User;
 
@@ -18,9 +20,11 @@ public class UserController {
     public User login(String userId,String password){
         User user = null;
         UserDAO userDAO = new UserDAO();
-        user = userDAO.findUserByUserId(userId);
-        if(user!=null){
-            if(user.getPassword().equals(password)){ //Login was successful
+        AuthenticationDAO authenticationDAO = new AuthenticationDAO();
+        Authentication authentication = authenticationDAO.findAutenticationByID(userId);
+        if(authentication!=null){
+            user = userDAO.findUserByUserId(userId);
+            if(authentication.getPassword().equals(password)){ //Login was successful
                 return user;
             }
         }
@@ -29,20 +33,24 @@ public class UserController {
     }
     public User register(String userId,String name,String email,String password,
             int gender,String role){
+        AuthenticationDAO authenticationDAO = new AuthenticationDAO();
         UserDAO userDAO = new UserDAO();
         RoleDAO roleDAO = new RoleDAO();
+        Authentication authentication = new Authentication();
+        authentication.setAuthenticationId(userId);
+        authentication.setPassword(password);
+        authenticationDAO.persist(authentication);
         User user = new User();
-        user.setUserId(userId);
         user.setName(name);
         user.setGender(gender);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setIdAuthentication(userId);
         if(userDAO.findUserByUserId(userId)!=null){
             return null;
         }
         
         Role  roleUser = roleDAO.findRoleByRoleId(role);
-        User userTemp = userDAO.persist(user, roleUser);
+        User userTemp = userDAO.persist(user, roleUser,authentication);
         return userTemp;
     }
 }

@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author yeisondavid
+ * @author AndresGutierrez
  */
 @Entity
-@Table(name = "exam")
+@Table(name = "Exam")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Exam.findAll", query = "SELECT e FROM Exam e"),
@@ -73,7 +73,7 @@ public class Exam implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idExam")
     private Collection<ResultExam> resultExamCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idExam")
-    private Collection<ExamByQuestion> exambyquestionCollection;
+    private Collection<ExamByQuestion> examByQuestionCollection;
 
     public Exam() {
     }
@@ -147,12 +147,12 @@ public class Exam implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ExamByQuestion> getExambyquestionCollection() {
-        return exambyquestionCollection;
+    public Collection<ExamByQuestion> getExamByQuestionCollection() {
+        return examByQuestionCollection;
     }
 
-    public void setExambyquestionCollection(Collection<ExamByQuestion> exambyquestionCollection) {
-        this.exambyquestionCollection = exambyquestionCollection;
+    public void setExamByQuestionCollection(Collection<ExamByQuestion> examByQuestionCollection) {
+        this.examByQuestionCollection = examByQuestionCollection;
     }
 
     @Override

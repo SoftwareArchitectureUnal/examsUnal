@@ -53,7 +53,7 @@ public class ResultExamDAO {
     public ResultExam insert(ResultExam relation){
         System.out.println("::: in insert");
         System.out.println(relation.getIdExam().getExamId());
-        System.out.println(relation.getIdUser().getUserId());
+        System.out.println(relation.getIdUser().getIdAuthentication());
         EntityManager em = emf.createEntityManager();
         
         em.getTransaction().begin();

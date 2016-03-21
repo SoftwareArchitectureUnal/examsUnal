@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,27 +26,20 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author yeisondavid
+ * @author AndresGutierrez
  */
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
     @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByGender", query = "SELECT u FROM User u WHERE u.gender = :gender"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
+    @NamedQuery(name = "User.findByIdAuthentication", query = "SELECT u FROM User u WHERE u.idAuthentication = :idAuthentication")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "userId")
-    private String userId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -61,11 +55,15 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "gender")
     private int gender;
+    @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "password")
-    private String password;
+    @Column(name = "idAuthentication")
+    private String idAuthentication;
+    @JoinColumn(name = "idAuthentication", referencedColumnName = "authenticationId", insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private Authentication authentication;
     @JoinColumn(name = "idRole", referencedColumnName = "roleId")
     @ManyToOne(optional = false)
     private Role idRole;
@@ -75,24 +73,15 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String userId) {
-        this.userId = userId;
+    public User(String idAuthentication) {
+        this.idAuthentication = idAuthentication;
     }
 
-    public User(String userId, String name, String email, int gender, String password) {
-        this.userId = userId;
+    public User(String idAuthentication, String name, String email, int gender) {
+        this.idAuthentication = idAuthentication;
         this.name = name;
         this.email = email;
         this.gender = gender;
-        this.password = password;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getName() {
@@ -119,12 +108,20 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public String getPassword() {
-        return password;
+    public String getIdAuthentication() {
+        return idAuthentication;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setIdAuthentication(String idAuthentication) {
+        this.idAuthentication = idAuthentication;
+    }
+
+    public Authentication getAuthentication() {
+        return authentication;
+    }
+
+    public void setAuthentication(Authentication authentication) {
+        this.authentication = authentication;
     }
 
     public Role getIdRole() {
@@ -147,7 +144,7 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (userId != null ? userId.hashCode() : 0);
+        hash += (idAuthentication != null ? idAuthentication.hashCode() : 0);
         return hash;
     }
 
@@ -158,7 +155,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.userId == null && other.userId != null) || (this.userId != null && !this.userId.equals(other.userId))) {
+        if ((this.idAuthentication == null && other.idAuthentication != null) || (this.idAuthentication != null && !this.idAuthentication.equals(other.idAuthentication))) {
             return false;
         }
         return true;
@@ -166,7 +163,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "co.unal.examsUnal.DataAccess.Entity.User[ userId=" + userId + " ]";
+        return "co.unal.examsUnal.DataAccess.Entity.User[ idAuthentication=" + idAuthentication + " ]";
     }
     
 }

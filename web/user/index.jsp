@@ -46,7 +46,7 @@
                     <!-- Table -->
                     <table class="display table table-striped table-bordered table-hover">
                         <%
-                        Collection<Pair<Exam, Boolean>> lista = ExamRegisterController.ExamsUser(((User)session.getAttribute("user")).getUserId());
+                        Collection<Pair<Exam, Boolean>> lista = ExamRegisterController.ExamsUser(((User)session.getAttribute("user")).getIdAuthentication());
                         Boolean flag;
                         Exam exam;
                         out.println("<tr>");
@@ -93,7 +93,7 @@
                 <!-- Table -->
                 <table class="table">        
                 <% User myUser = (User)session.getAttribute("user"); 
-                    ArrayList<Exam> myExams = (ArrayList)CertificationController.getPasExamsofUser(myUser.getUserId());
+                    ArrayList<Exam> myExams = (ArrayList)CertificationController.getPasExamsofUser(myUser.getIdAuthentication());
                     out.print("<tr>");
                         out.print("<th>Exámenes</th>");
                     out.print("</tr>");

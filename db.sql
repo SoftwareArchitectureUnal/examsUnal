@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS `User`;
-DROP TABLE IF EXISTS `Authentication`
+DROP TABLE IF EXISTS `Authentication`;
 DROP TABLE IF EXISTS `Role`;
 DROP TABLE IF EXISTS `ExamByQuestion`;
 DROP TABLE IF EXISTS `ResultExam`;
@@ -23,7 +23,7 @@ CREATE TABLE `User` (
     `gender` int NOT NULL,
     `idRole` varchar(255) NOT NULL,
     `idAuthentication` varchar(255) NOT NULL,
-    FOREIGN KEY(idAuthentication) REFERENCES AUTHENTICATIOIN(authenticationId) ON DELETE CASCADE,
+    FOREIGN KEY(idAuthentication) REFERENCES AUTHENTICATION(authenticationId) ON DELETE CASCADE,
     FOREIGN KEY(idRole) REFERENCES ROLE(roleId) ON DELETE CASCADE,
     PRIMARY KEY(`idAuthentication`) 
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;

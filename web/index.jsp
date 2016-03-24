@@ -29,6 +29,10 @@
                 %>
             </c:when>
         </c:choose>
+        <!--
+        <br><br><br><br><br>
+        <img class="img-responsive center-block" src="${pageContext.request.contextPath}/resources/images/unal.svg.png" >
+        --> 
         <%@include file="/WEB-INF/jspf/footer.jspf" %>
     </body>
 </html>

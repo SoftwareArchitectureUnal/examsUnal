@@ -37,8 +37,16 @@
         </c:if>
         
          <%@include file="/WEB-INF/jspf/menu.jspf"%>
+         
          <div class="col-md-10 col-md-offset-1">
-         <form action="./RegisterExamServlet" method="post">
+             <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#exam-register" id="tab-exam-register">Incribir exámenes</a></li>
+                        <li><a data-toggle="tab" href="#show-certified" id="tab-show-certified">Certificados</a></li>
+                       
+            </ul>
+             <div class="tab-content">
+                 <div id="exam-register" class="tab-pane fade in active">
+                     <form action="./RegisterExamServlet" method="post">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 
@@ -84,10 +92,9 @@
             
             <button type = "submit" class = "btn btn-primary" name = "btsave">Guardar</button>
         </form>  
-        
-        
-        <br><br><br>   
-        <div class="panel panel-default">
+                 </div>
+                 <div id="show-certified" class="tab-pane fade">
+                        <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Certificados</div>
                 <!-- Table -->
@@ -114,6 +121,13 @@
                 
                 </table>
         </div>  
+                 </div>
+             </div>
+         
+        
+        
+        
+     
         </div>
         <%@include file="/WEB-INF/jspf/footer.jspf"%>
     </body>

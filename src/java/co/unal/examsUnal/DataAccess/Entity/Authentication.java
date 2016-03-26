@@ -21,10 +21,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author AndresGutierrez
+ * @author yeisondavid
  */
 @Entity
-@Table(name = "Authentication")
+@Table(name = "authentication")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Authentication.findAll", query = "SELECT a FROM Authentication a"),
@@ -39,9 +39,7 @@ public class Authentication implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "authenticationId")
     private String authenticationId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "password")
     private String password;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "authentication")
@@ -52,11 +50,6 @@ public class Authentication implements Serializable {
 
     public Authentication(String authenticationId) {
         this.authenticationId = authenticationId;
-    }
-
-    public Authentication(String authenticationId, String password) {
-        this.authenticationId = authenticationId;
-        this.password = password;
     }
 
     public String getAuthenticationId() {

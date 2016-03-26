@@ -8,7 +8,6 @@ package co.unal.examsUnal.DataAccess.Entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -26,48 +25,42 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author AndresGutierrez
+ * @author yeisondavid
  */
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name"),
+    @NamedQuery(name = "User.findByIdAuthentication", query = "SELECT u FROM User u WHERE u.idAuthentication = :idAuthentication"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByGender", query = "SELECT u FROM User u WHERE u.gender = :gender"),
-    @NamedQuery(name = "User.findByIdAuthentication", query = "SELECT u FROM User u WHERE u.idAuthentication = :idAuthentication")})
+    @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "name")
-    private String name;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "email")
-    private String email;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "gender")
-    private int gender;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "idAuthentication")
     private String idAuthentication;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 255)
+    @Column(name = "email")
+    private String email;
+    @Column(name = "gender")
+    private Integer gender;
+    @Size(max = 255)
+    @Column(name = "name")
+    private String name;
     @JoinColumn(name = "idAuthentication", referencedColumnName = "authenticationId", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Authentication authentication;
     @JoinColumn(name = "idRole", referencedColumnName = "roleId")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Role idRole;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    @OneToMany(mappedBy = "idUser")
     private Collection<ResultExam> resultExamCollection;
 
     public User() {
@@ -77,19 +70,12 @@ public class User implements Serializable {
         this.idAuthentication = idAuthentication;
     }
 
-    public User(String idAuthentication, String name, String email, int gender) {
+    public String getIdAuthentication() {
+        return idAuthentication;
+    }
+
+    public void setIdAuthentication(String idAuthentication) {
         this.idAuthentication = idAuthentication;
-        this.name = name;
-        this.email = email;
-        this.gender = gender;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
@@ -100,20 +86,20 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
-    public String getIdAuthentication() {
-        return idAuthentication;
+    public String getName() {
+        return name;
     }
 
-    public void setIdAuthentication(String idAuthentication) {
-        this.idAuthentication = idAuthentication;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Authentication getAuthentication() {

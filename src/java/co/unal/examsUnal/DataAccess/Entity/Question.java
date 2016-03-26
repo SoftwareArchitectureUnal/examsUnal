@@ -8,7 +8,6 @@ package co.unal.examsUnal.DataAccess.Entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,10 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author AndresGutierrez
+ * @author yeisondavid
  */
 @Entity
-@Table(name = "Question")
+@Table(name = "question")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Question.findAll", query = "SELECT q FROM Question q"),
@@ -42,17 +41,13 @@ public class Question implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "questionId")
     private String questionId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "category")
     private String category;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idQuestion")
+    @OneToMany(mappedBy = "idQuestion")
     private Collection<ExamByQuestion> examByQuestionCollection;
 
     public Question() {
@@ -67,7 +62,7 @@ public class Question implements Serializable {
         this.category = category;
         this.description = description;
     }
-
+    
     public String getQuestionId() {
         return questionId;
     }

@@ -20,10 +20,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author AndresGutierrez
+ * @author yeisondavid
  */
 @Entity
-@Table(name = "ExamByQuestion")
+@Table(name = "exambyquestion")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ExamByQuestion.findAll", query = "SELECT e FROM ExamByQuestion e"),
@@ -36,12 +36,12 @@ public class ExamByQuestion implements Serializable {
     @NotNull
     @Column(name = "examByQuestionId")
     private Integer examByQuestionId;
-    @JoinColumn(name = "idQuestion", referencedColumnName = "questionId")
-    @ManyToOne(optional = false)
-    private Question idQuestion;
     @JoinColumn(name = "idExam", referencedColumnName = "examId")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Exam idExam;
+    @JoinColumn(name = "idQuestion", referencedColumnName = "questionId")
+    @ManyToOne
+    private Question idQuestion;
 
     public ExamByQuestion() {
     }
@@ -58,20 +58,20 @@ public class ExamByQuestion implements Serializable {
         this.examByQuestionId = examByQuestionId;
     }
 
-    public Question getIdQuestion() {
-        return idQuestion;
-    }
-
-    public void setIdQuestion(Question idQuestion) {
-        this.idQuestion = idQuestion;
-    }
-
     public Exam getIdExam() {
         return idExam;
     }
 
     public void setIdExam(Exam idExam) {
         this.idExam = idExam;
+    }
+
+    public Question getIdQuestion() {
+        return idQuestion;
+    }
+
+    public void setIdQuestion(Question idQuestion) {
+        this.idQuestion = idQuestion;
     }
 
     @Override

@@ -17,15 +17,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author AndresGutierrez
+ * @author yeisondavid
  */
 @Entity
-@Table(name = "ResultExam")
+@Table(name = "resultexam")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ResultExam.findAll", query = "SELECT r FROM ResultExam r"),
@@ -40,32 +39,22 @@ public class ResultExam implements Serializable {
     @Basic(optional = false)
     @Column(name = "resultExamId")
     private Integer resultExamId;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "approved")
-    private int approved;
-    @Basic(optional = false)
-    @NotNull
+    private Integer approved;
     @Column(name = "status")
-    private int status;
-    @JoinColumn(name = "idUser", referencedColumnName = "idAuthentication")
-    @ManyToOne(optional = false)
-    private User idUser;
+    private Integer status;
     @JoinColumn(name = "idExam", referencedColumnName = "examId")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Exam idExam;
+    @JoinColumn(name = "idUser", referencedColumnName = "idAuthentication")
+    @ManyToOne
+    private User idUser;
 
     public ResultExam() {
     }
 
     public ResultExam(Integer resultExamId) {
         this.resultExamId = resultExamId;
-    }
-
-    public ResultExam(Integer resultExamId, int approved, int status) {
-        this.resultExamId = resultExamId;
-        this.approved = approved;
-        this.status = status;
     }
 
     public Integer getResultExamId() {
@@ -76,28 +65,20 @@ public class ResultExam implements Serializable {
         this.resultExamId = resultExamId;
     }
 
-    public int getApproved() {
+    public Integer getApproved() {
         return approved;
     }
 
-    public void setApproved(int approved) {
+    public void setApproved(Integer approved) {
         this.approved = approved;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public User getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(User idUser) {
-        this.idUser = idUser;
     }
 
     public Exam getIdExam() {
@@ -106,6 +87,14 @@ public class ResultExam implements Serializable {
 
     public void setIdExam(Exam idExam) {
         this.idExam = idExam;
+    }
+
+    public User getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(User idUser) {
+        this.idUser = idUser;
     }
 
     @Override

@@ -8,7 +8,6 @@ package co.unal.examsUnal.DataAccess.Entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,10 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author AndresGutierrez
+ * @author yeisondavid
  */
 @Entity
-@Table(name = "Role")
+@Table(name = "role")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
@@ -41,12 +40,10 @@ public class Role implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "roleId")
     private String roleId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRole")
+    @OneToMany(mappedBy = "idRole")
     private Collection<User> userCollection;
 
     public Role() {
@@ -54,11 +51,6 @@ public class Role implements Serializable {
 
     public Role(String roleId) {
         this.roleId = roleId;
-    }
-
-    public Role(String roleId, String description) {
-        this.roleId = roleId;
-        this.description = description;
     }
 
     public String getRoleId() {

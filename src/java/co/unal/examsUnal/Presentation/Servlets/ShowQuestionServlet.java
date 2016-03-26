@@ -5,7 +5,7 @@
  */
 package co.unal.examsUnal.Presentation.Servlets;
 
-import co.unal.examsUnal.BusinessLogic.Controller.User.QuestionController;
+import co.unal.examsUnal.BusinessLogic.Controller.Management.QuestionController;
 import co.unal.examsUnal.DataAccess.Entity.Question;
 import java.io.IOException;
 import java.util.Collection;

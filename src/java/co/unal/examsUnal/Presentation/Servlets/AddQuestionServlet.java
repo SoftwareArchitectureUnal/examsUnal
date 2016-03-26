@@ -5,8 +5,8 @@
  */
 package co.unal.examsUnal.Presentation.Servlets;
 
-import co.unal.examsUnal.BusinessLogic.Controller.User.ExamController;
-import co.unal.examsUnal.BusinessLogic.Controller.User.QuestionController;
+import co.unal.examsUnal.BusinessLogic.Controller.Management.ExamController;
+import co.unal.examsUnal.BusinessLogic.Controller.Management.QuestionController;
 import co.unal.examsUnal.BusinessLogic.Controller.User.UserController;
 import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.Question;

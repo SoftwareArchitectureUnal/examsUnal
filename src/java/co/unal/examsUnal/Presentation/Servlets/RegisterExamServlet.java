@@ -5,7 +5,7 @@
  */
 package co.unal.examsUnal.Presentation.Servlets;
 
-import co.unal.examsUnal.BusinessLogic.Controller.User.ExamRegisterController;
+import co.unal.examsUnal.BusinessLogic.Controller.Management.ExamRegisterController;
 import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.User;
 import co.unal.examsUnal.Utilities.Util.Pair;

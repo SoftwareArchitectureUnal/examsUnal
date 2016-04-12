@@ -1,11 +1,11 @@
-<%-- 
+<%--
     Document   : index
     Created on : 28-feb-2016, 10:37:01
     Author     : alej0
 --%>
 
 <%@page import="co.unal.examsUnal.DataAccess.Entity.Exam"%>
-<%@page import="co.unal.examsUnal.BusinessLogic.Controller.User.ExamController"%>
+<%@page import="co.unal.examsUnal.BusinessLogic.Controller.Management.ExamController"%>
 <%@page import="java.util.Collection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,37 +13,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Exámenes</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-ui.css" type="text/css"/>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dataTables/css/dataTables.bootstrap.min.css" type="text/css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-ui.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dataTables/css/dataTables.bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/login.css">
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/chart/Chart.min.js"></script>
     </head>
     <body>
-        <div class="modal fade" id="modal-statistics" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Estadísticas</h4>
-                    </div>
-                    <div class="modal-body">
-                        <!--<ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#registered-users">Usuarios registrados</a></li>
-                            <li><a data-toggle="tab" href="#certified-users">Usuarios certificados</a></li>
-                            <li><a data-toggle="tab" href="#exams-statistics">Exámenes</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="registered-users" class="tab-pane fade in active">
-                            </div>
-                            <div id="certified-users" class="tab-pane fade">bueno</div>
-                            <div id="exams-statistics" class="tab-pane fade">chao</div>
-                        </div>-->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="modal fade" id="modal-deleted" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -149,9 +125,8 @@
                 </div>
             </div>
         </div>
+        
         <%@include file="/WEB-INF/jspf/menu.jspf" %>
-        
-        
         
         <div class="container">
             <div class="row">
@@ -269,21 +244,19 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
                     <div class="col-md-12"><br/><br/><br/><br/></div>
                     <div class="col-md-12"><br/><br/><br/><br/></div>
                     <div class="col-md-12"><br/><br/><br/><br/></div>
                 </div>
             </div>
         </div>
-        <!--<%@include file="/WEB-INF/jspf/footer.jspf" %>-->
         
         <script src="${pageContext.request.contextPath}/resources/js/jquery/dist/jquery.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-ui.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-ui.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/dataTables/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/resources/dataTables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/admin/exams.js"></script>
-        
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     </body>
 </html>

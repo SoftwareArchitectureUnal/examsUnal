@@ -36,19 +36,32 @@
                 <strong>Error!</strong> No se pudo hacer el login
             </div>
         </c:if>
-        <div class="container">
+        <div class="container" style="text-align: center;">
+            <h2 class="form-signin-heading">Por favor hacer el login</h2><br/>
             <form class="form-signin" method="post" action="${pageContext.request.contextPath}/LoginServlet">
-                <h2 class="form-signin-heading">Por favor hacer el login</h2>
-                <label for="inputUsername" class="sr-only" >Nombre de usuario</label>
-                <input type="text" id="inputUsername" name="inputUsername" class="form-control"
-                       placeholder="Nombre de usario" required autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" name="inputPassword" onchange="checkPassword()" class="form-control"
-                       placeholder="Contraseña" required>
+                <!--<label for="inputUsername" class="sr-only" >Nombre de usuario</label>
+                <label for="inputPassword" class="sr-only">Password</label>-->
+                
+                <div class="input-group">
+                    <input type="text" id="inputUsername" name="inputUsername" class="form-control"
+                           placeholder="Nombre de usuario" required autofocus />
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                    </div>
+                </div><br/>
+                
+                <!--<div class="input-group">-->
+                    <input type="password" id="inputPassword" name="inputPassword" onchange="checkPassword()" class="form-control"
+                           placeholder="Contraseña" required />
+                    <!--<div class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                    </div>-->
+                <!--</div>--><br/>
+                
                 <button id="signUp" class="btn btn-lg btn-primary btn-block" type="submit" >Inicio de session</button>
-
             </form>
         </div>
+        
         <%@include file="/WEB-INF/jspf/footer.jspf" %>
     </body>
 </html>

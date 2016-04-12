@@ -157,7 +157,6 @@ public class AdminExamsServlet extends HttpServlet {
         if(method.equals("deleteExam")){
             ExamController examController = new ExamController();
             int id = Integer.parseInt( request.getParameter("id") );
-            System.out.println(id);
             Exam exam = examController.findById(id);
             examController.deleteExam(exam);
         }
@@ -169,8 +168,7 @@ public class AdminExamsServlet extends HttpServlet {
                 for(ExamResult examResult: examResults){
                     results += "$$" + examResult.getExam().getExamId() + "&&" + examResult.getExam().getName() + "&&" + examResult.getPassed() + "&&" + examResult.getFailed();
                 }
-                System.out.println(results);
-                results = results.substring(2);
+                results = results.length() > 2 ? results.substring(2) : "";
                 PrintWriter out = response.getWriter();
                 out.print(results);
             }catch(Exception e){
@@ -206,8 +204,7 @@ public class AdminExamsServlet extends HttpServlet {
                         result += "$$" + exam.getExamId() + "&&" + exam.getName() + "&&" + "Publicado";
                     }
                 }
-                System.out.println(result);
-                result = result.substring(2);
+                result = result.length() > 2 ? result.substring(2) : "";
                 PrintWriter out = response.getWriter();
                 out.print(result);
             }catch(Exception e){
@@ -223,7 +220,7 @@ public class AdminExamsServlet extends HttpServlet {
                     registers += "$$" + examRegister.getExam().getExamId() + "&&" + examRegister.getExam().getName() + "&&" + examRegister.getPassed();
                 }
                 System.out.println(registers);
-                registers = registers.substring(2);
+                registers = registers.length() > 2 ? registers.substring(2) : "";
                 PrintWriter out = response.getWriter();
                 out.print(registers);
             }catch(Exception e){

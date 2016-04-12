@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 09-abr-2016, 22:58:11
+    Author     : alej0
+*/
+
+.modal-header, h4, .close {
+    background-color: #464D57;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+}
+.modal-footer {
+    background-color: #f9f9f9;
+}
+#modal-signup, #modal-login{
+    top:10%;
+    right:0%;
+    outline: none;
+}
+.modal .modal-body{
+    padding: 8%;
+}
+@media screen and (min-width: 768px) {
+    .modal .modal-dialog  {width:450px;}
+}
+@media screen and (max-width: 767px) {
+    .modal .modal-dialog  {width:75%;}
+}

@@ -10,23 +10,23 @@ $(document).ready(function() {
         var _oldShow = $.fn.show;
 
         $.fn.show = function(speed, oldCallback) {
-          return $(this).each(function() {
-            var obj         = $(this),
+            return $(this).each(function() {
+                var obj = $(this),
                 newCallback = function() {
-                  if ($.isFunction(oldCallback)) {
-                    oldCallback.apply(obj);
-                  }
-                  obj.trigger('afterShow');
+                    if ($.isFunction(oldCallback)) {
+                        oldCallback.apply(obj);
+                    }
+                    obj.trigger('afterShow');
                 };
 
-            // you can trigger a before show if you want
-            obj.trigger('beforeShow');
+                // you can trigger a before show if you want
+                obj.trigger('beforeShow');
 
-            // now use the old function to show the element passing the new callback
-            _oldShow.apply(obj, [speed, newCallback]);
-          });
+                // now use the old function to show the element passing the new callback
+                _oldShow.apply(obj, [speed, newCallback]);
+            });
         }
-      });
+    });
     
     charts();
     $('#table-exams').dataTable({
@@ -147,7 +147,7 @@ $(document).ready(function() {
     $(".datepicker").datepicker("option", "showAnim", "slideDown");
     $(".datepicker").datepicker("option", "dateFormat", "dd-mm-yy");
     
-    $.widget( "custom.catcomplete", $.ui.autocomplete, {
+    /*$.widget( "custom.catcomplete", $.ui.autocomplete, {
       _create: function() {
         this._super();
         this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
@@ -167,7 +167,7 @@ $(document).ready(function() {
           }
         });
       }
-    });
+    });*/
     
     var labelsComplete = []; 
     var categoriesComplete = []; 

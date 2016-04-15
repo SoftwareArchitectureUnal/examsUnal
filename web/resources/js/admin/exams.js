@@ -28,6 +28,12 @@ $(document).ready(function() {
         }
     });
     
+    $("#close-modal").click( function(){
+        $("#modal-saved").hide();
+        alert("hola");
+    });  
+    //setInterval(function(){ alert("Hello"); }, 1000);
+    
     charts();
     $('#table-exams').dataTable({
         "language": {
@@ -197,14 +203,14 @@ $(document).ready(function() {
         for(var i = 0; i < labels.length; i++){
             data.push( { label: labels[i], category: categories[i]});
         }
-        $( "#search-exams" ).catcomplete({
+        $( "#search-exams" ).autocomplete({
             delay: 0,
             source: data
         });
     }
     
     $("#btn-statistics").click(function () {
-        //$('#modal-statistics').modal();
+        
     });
     
     $("#btn-load").click(function () {
@@ -349,7 +355,7 @@ $(document).ready(function() {
                         legendTemplate : "<ul class='<%=name.toLowerCase()%>-legend'>" +
                                             "<% for (var i=0; i<segments.length; i++){%>" +
                                                 "<li style=\"list-style-type: none;\">" + 
-                                                    "<span style=\"color:black;\"><h4 style=\"color:<%=segments[i].fillColor%>;\" class=\"glyphicon glyphicon-stop\" aria-hidden=\"true\"></h4><%if(segments[i].label){%>&nbsp;<%=segments[i].label%><%}%><br/></span>" + 
+                                                    "<span style=\"color:black;\"><h4 style=\"color:<%=segments[i].fillColor !important;%>;\" class=\"glyphicon glyphicon-stop\" aria-hidden=\"true\"></h4><%if(segments[i].label){%>&nbsp;<%=segments[i].label%><%}%><br/></span>" + 
                                                 "</li>" + 
                                             "<%}%>" +
                                          "</ul>"

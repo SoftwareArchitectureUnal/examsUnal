@@ -5,9 +5,9 @@
 --%>
 
 <%@page import="co.unal.examsUnal.Utilities.Util.Pair"%>
-<%@page import="co.unal.examsUnal.BusinessLogic.Controller.User.CertificationController"%>
+<%@page import="co.unal.examsUnal.BusinessLogic.Controller.Report.CertificationController"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="co.unal.examsUnal.BusinessLogic.Controller.User.ExamRegisterController"%>
+<%@page import="co.unal.examsUnal.BusinessLogic.Controller.Management.ExamRegisterController"%>
 <%@page import="co.unal.examsUnal.DataAccess.Entity.User"%>
 <%@page import="co.unal.examsUnal.DataAccess.Entity.Exam"%>
 <%@page import="java.util.Date"%>
@@ -36,98 +36,85 @@
             %>
         </c:if>
         
-         <%@include file="/WEB-INF/jspf/menu.jspf"%>
+        <%@include file="/WEB-INF/jspf/menu.jspf"%>
          
-         <div class="col-md-10 col-md-offset-1">
-             <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#exam-register" id="tab-exam-register">Incribir exámenes</a></li>
-                        <li><a data-toggle="tab" href="#show-certified" id="tab-show-certified">Certificados</a></li>
-                       
+        <div class="col-md-10 col-md-offset-1">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#exam-register" id="tab-exam-register">Incribir exámenes</a></li>
+                <li><a data-toggle="tab" href="#show-certified" id="tab-show-certified">Certificados</a></li>         
             </ul>
-             <div class="tab-content">
-                 <div id="exam-register" class="tab-pane fade in active">
-                     <form action="./RegisterExamServlet" method="post">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                
-                    <div class="panel-heading">Examenes</div>
-                    <!-- Table -->
-                    <table class="display table table-striped table-bordered table-hover">
-                        <%
-                        Collection<Pair<Exam, Boolean>> lista = ExamRegisterController.ExamsUser(((User)session.getAttribute("user")).getIdAuthentication());
-                        Boolean flag;
-                        Exam exam;
-                        out.println("<tr>");
-                            out.println("<th>Nombre             </th>");
-                            out.println("<th>Descripción        </th>");
-                            out.println("<th>Fecha           </th>");
-                            out.println("<th>Inscribir           </th>");
-                            out.println("</tr>");
-                        Date auxDate;
-                        for( Pair myPair : lista)
-                        {
-
-                            exam = (Exam)myPair.getKey();
-                            auxDate = exam.getRealizationDate();
-                            if ( auxDate.compareTo(new Date()) == -1) continue;
-                            flag = (Boolean)myPair.getValue();
-                            out.println("<tr>");
-                            out.println("<td>"+exam.getName()+"               "+"</td>");
-                            out.println("<td>"+exam.getDescription()+"              "+"</td>");
-                            out.println("<td>"+exam.getRealizationDate().getDate()+"/"+exam.getRealizationDate().getMonth()+"/"+(exam.getRealizationDate().getYear()+1900)+"             "+"</td>");
-                            if ( flag )
-                            {
-                                out.println("<td> <input type=\"checkbox\" name=\"checkb"+exam.getExamId()+"\"  checked>          </td>"); 
-                            }
-                            else
-                            {
-                                out.println("<td> <input type=\"checkbox\" name=\"checkb"+exam.getExamId()+"\" >          </td>");
-                            }
-                            out.println("</tr>");
-                        }
-                        %>
-                    </table>
-                </div>
-                    
-            
-            <button type = "submit" class = "btn btn-primary" name = "btsave">Guardar</button>
-        </form>  
-                 </div>
-                 <div id="show-certified" class="tab-pane fade">
+            <div class="tab-content">
+                <div id="exam-register" class="tab-pane fade in active">
+                    <form action="./RegisterExamServlet" method="post">
                         <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">Certificados</div>
-                <!-- Table -->
-                <table class="table">        
-                <% User myUser = (User)session.getAttribute("user"); 
-                    ArrayList<Exam> myExams = (ArrayList)CertificationController.getPasExamsofUser(myUser.getIdAuthentication());
-                    out.print("<tr>");
-                        out.print("<th>Exámenes</th>");
-                    out.print("</tr>");
-                    
-                    for( int i = 0; i < myExams.size(); i++ )
-                    {
-     
-                       out.print("<tr>");
-                       out.print("<td>"+(myExams.get(i).getName())+"</th>");
-                       out.print("<td> <form action=\"./CertificationServlet\" method=\"post\"> "
-                               + "<input type=\"hidden\" name=\"nameExam\" value=\""+myExams.get(i).getName()+"\">"
-                               + "<button type = \"submit\" class = \"btn btn-primary\" name=\"bt\" >Certificado</button>"
-                               + "</form> </th>");
-                       out.print("</tr>");
-                    }
-                %>
-                
-                
-                </table>
-        </div>  
-                 </div>
-             </div>
-         
-        
-        
-        
-     
+                        <!-- Default panel contents -->
+                            <div class="panel-heading">Examenes</div>
+                            <!-- Table -->
+                            <table class="display table table-striped table-bordered table-hover">
+                                <%
+                                    Collection<Pair<Exam, Boolean>> lista = ExamRegisterController.ExamsUser(((User)session.getAttribute("user")).getIdAuthentication());
+                                    Boolean flag;
+                                    Exam exam;
+                                    out.println("<tr>");
+                                        out.println("<th>Nombre             </th>");
+                                        out.println("<th>Descripción        </th>");
+                                        out.println("<th>Fecha           </th>");
+                                        out.println("<th>Inscribir           </th>");
+                                        out.println("</tr>");
+                                    Date auxDate;
+                                    for( Pair myPair : lista)
+                                    {
+
+                                        exam = (Exam)myPair.getKey();
+                                        auxDate = exam.getRealizationDate();
+                                        if ( auxDate.compareTo(new Date()) == -1) continue;
+                                        flag = (Boolean)myPair.getValue();
+                                        out.println("<tr>");
+                                        out.println("<td>"+exam.getName()+"               "+"</td>");
+                                        out.println("<td>"+exam.getDescription()+"              "+"</td>");
+                                        out.println("<td>"+exam.getRealizationDate().getDate()+"/"+exam.getRealizationDate().getMonth()+"/"+(exam.getRealizationDate().getYear()+1900)+"             "+"</td>");
+                                        if ( flag )
+                                        {
+                                            out.println("<td> <input type=\"checkbox\" name=\"checkb"+exam.getExamId()+"\"  checked>          </td>"); 
+                                        }
+                                        else
+                                        {
+                                            out.println("<td> <input type=\"checkbox\" name=\"checkb"+exam.getExamId()+"\" >          </td>");
+                                        }
+                                        out.println("</tr>");
+                                    }
+                                %>
+                            </table>
+                        </div>    
+                        <button type = "submit" class = "btn btn-primary" name = "btsave">Guardar</button>
+                    </form>  
+                </div>
+                <div id="show-certified" class="tab-pane fade">
+                    <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                        <div class="panel-heading">Certificados</div>
+                        <!-- Table -->
+                        <table class="table">        
+                            <% 
+                                User myUser = (User)session.getAttribute("user"); 
+                                ArrayList<Exam> myExams = (ArrayList)CertificationController.getPasExamsofUser(myUser.getIdAuthentication());
+                                out.print("<tr>");
+                                out.print("<th>Exámenes</th>");
+                                out.print("</tr>");
+                                for( int i = 0; i < myExams.size(); i++ ){
+                                   out.print("<tr>");
+                                   out.print("<td>"+(myExams.get(i).getName())+"</th>");
+                                   out.print("<td> <form action=\"./CertificationServlet\" method=\"post\"> "
+                                           + "<input type=\"hidden\" name=\"nameExam\" value=\""+myExams.get(i).getName()+"\">"
+                                           + "<button type = \"submit\" class = \"btn btn-primary\" name=\"bt\" >Certificado</button>"
+                                           + "</form> </th>");
+                                   out.print("</tr>");
+                                }
+                            %>
+                        </table>
+                    </div>  
+                </div>
+            </div>
         </div>
         <%@include file="/WEB-INF/jspf/footer.jspf"%>
     </body>

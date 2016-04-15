@@ -5,8 +5,11 @@
  */
 package co.unal.examsUnal.DataAccess.DAO;
 
+import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.ResultExam;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,6 +44,26 @@ public class ResultExamDAO {
         try{
             relation = em.merge(relation);
             em.remove(relation);
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+        }finally{
+            em.close();
+        }
+        return true;
+    }
+    
+    public boolean deleteByExamId(Exam exam) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try{
+            ArrayList<ResultExam> results = new ArrayList<>(findAllRelation());
+            for(ResultExam result : results){
+                if( Objects.equals(result.getIdExam().getExamId(), exam.getExamId()) ){
+                    result = em.merge(result);
+                    em.remove(result);
+                }
+            }
             em.getTransaction().commit();
         }catch(Exception e){
             em.getTransaction().rollback();

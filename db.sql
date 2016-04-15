@@ -28,7 +28,7 @@ CREATE TABLE `User` (
     PRIMARY KEY(`idAuthentication`) 
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `Exam`(
-	`examId` INT AUTO_INCREMENT,
+	`examId` INT AUTO_INCREMENT=1000,
 	`name` varchar(255) NOT NULL UNIQUE,
 	`realizationDate` date NOT NULL,
 	`description` varchar(255) NOT NULL,

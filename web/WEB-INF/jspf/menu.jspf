@@ -30,7 +30,7 @@
                     <li><a href="${pageContext.request.contextPath}/index.jsp">${user.getIdAuthentication()}</a></li>
                 </c:if>
                 <c:if test="${admin!=null}">
-                    <li><a href="${pageContext.request.contextPath}/index.jsp">Admin</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/index.jsp">Admin</a></li>
                 </c:if>
                 
                 <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
@@ -46,7 +46,7 @@
                         </li>
                         <li><a href="${pageContext.request.contextPath}/LogoutServlet">Log out</a></li>
                     </c:when>
-                   <c:when test="${admin!=null}">
+                    <c:when test="${admin!=null}">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Questions</a>
                             <ul class="dropdown-menu">
@@ -56,8 +56,8 @@
                             </ul>
                         </li>
                             <li><a href="${pageContext.request.contextPath}/LogoutServlet">Log out</a></li>
-                   </c:when>
-                   <c:when test="${user==null && admin==null}">
+                    </c:when>
+                    <c:when test="${user==null && admin==null}">
                         <li><a href="${pageContext.request.contextPath}/signUp.jsp">Sign Up</a></li>
                         <li><a href="${pageContext.request.contextPath}/login.jsp">Login</a></li>
                     </c:when >                  

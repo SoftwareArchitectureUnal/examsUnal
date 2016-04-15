@@ -13,14 +13,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Exámenes</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/modal/modal.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-ui.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dataTables/css/dataTables.bootstrap.min.css" type="text/css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/login.css">
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/chart/Chart.min.js"></script>
+        
     </head>
     <body>
-        <div class="modal fade" id="modal-deleted" role="dialog">
+        <div class="modal fade modal-small" id="modal-deleted" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -36,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-saved" role="dialog">
+        <div class="modal fade modal-small" id="modal-saved" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -52,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-save" role="dialog">
+        <div class="modal fade modal-large" id="modal-save" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -80,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-updated" role="dialog">
+        <div class="modal fade modal-small" id="modal-updated" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -96,7 +97,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-update" role="dialog">
+        <div class="modal fade modal-large" id="modal-update" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -191,7 +192,7 @@
                         %>
                     </table><br/><br/><br/>
                     <div class="col-md-3">
-                        <button type="button" id="btn-statistics" class="btn btn-lg btn-primary btn-block">Estadísticas</button>
+                        <a href="${pageContext.request.contextPath}/admin/statistics.jsp"><button type="button" id="btn-statistics" class="btn btn-lg btn-primary btn-block">Estadísticas</button></a>
                     </div>
                     <div class="col-md-3 col-md-offset-6">
                         <button type="button" id="btn-insert" class="btn btn-lg btn-primary btn-block">Nuevo</button><br/><br/>
@@ -256,7 +257,7 @@
         <script src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-ui.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/dataTables/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/resources/dataTables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/admin/exams.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/admin/exams.js"></script>
     </body>
 </html>

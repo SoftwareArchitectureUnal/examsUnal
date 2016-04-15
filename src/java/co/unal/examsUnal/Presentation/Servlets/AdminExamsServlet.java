@@ -75,26 +75,21 @@ public class AdminExamsServlet extends HttpServlet {
         String method = request.getParameter("method");
         
         if(method.equals("insertExam")){
-            try{
-                String name = request.getParameter("name");
+            String name = request.getParameter("name");
 
-                DateFormat sourceFormat = new SimpleDateFormat("dd-MM-yyyy");
-                String expDateAsString = request.getParameter("expeditionDate");
-                Date expDate = sourceFormat.parse(expDateAsString);
+            String expDateAsString = request.getParameter("expeditionDate");
+            Date expDate = parseDate(expDateAsString);
 
-                String realDateAsString = request.getParameter("realizationDate");
-                Date realDate = sourceFormat.parse(realDateAsString);
+            String realDateAsString = request.getParameter("realizationDate");
+            Date realDate = parseDate(realDateAsString);
 
-                String certDateAsString = request.getParameter("certificationDate");
-                Date certDate = sourceFormat.parse(certDateAsString);
-                
-                String description = request.getParameter("description");
-                
-                ExamController examController = new ExamController();
-                examController.insert(name, expDate, realDate, certDate, description);
-            }catch(Exception e){
-                
-            }
+            String certDateAsString = request.getParameter("certificationDate");
+            Date certDate = parseDate(certDateAsString);
+
+            String description = request.getParameter("description");
+
+            ExamController examController = new ExamController();
+            examController.insert(name, expDate, realDate, certDate, description);
         }
         if(method.equals("findExam")){
             ExamController examController = new ExamController();
@@ -131,28 +126,23 @@ public class AdminExamsServlet extends HttpServlet {
         }
         
         if(method.equals("updateExam")){
-            try{
-                int examId = Integer.parseInt( request.getParameter("id") );
-                System.out.println("id   : " + examId);
-                String name = request.getParameter("name");
+            int examId = Integer.parseInt( request.getParameter("id") );
+            System.out.println("id   : " + examId);
+            String name = request.getParameter("name");
 
-                DateFormat sourceFormat = new SimpleDateFormat("dd-MM-yyyy");
-                String expDateAsString = request.getParameter("expeditionDate");
-                Date expDate = sourceFormat.parse(expDateAsString);
+            String expDateAsString = request.getParameter("expeditionDate");
+            Date expDate = parseDate(expDateAsString);
 
-                String realDateAsString = request.getParameter("realizationDate");
-                Date realDate = sourceFormat.parse(realDateAsString);
+            String realDateAsString = request.getParameter("realizationDate");
+            Date realDate = parseDate(realDateAsString);
 
-                String certDateAsString = request.getParameter("certificationDate");
-                Date certDate = sourceFormat.parse(certDateAsString);
-                
-                String description = request.getParameter("description");
-                
-                ExamController examController = new ExamController();
-                examController.update(examId, name, expDate, realDate, certDate, description);
-            }catch(ParseException e){
-                e.printStackTrace();
-            }
+            String certDateAsString = request.getParameter("certificationDate");
+            Date certDate = parseDate(certDateAsString);
+
+            String description = request.getParameter("description");
+
+            ExamController examController = new ExamController();
+            examController.update(examId, name, expDate, realDate, certDate, description);
         }
         if(method.equals("deleteExam")){
             ExamController examController = new ExamController();
@@ -228,6 +218,20 @@ public class AdminExamsServlet extends HttpServlet {
             }
         }
         processRequest(request, response);
+    }
+    
+    private Date parseDate( String date ){
+        Date parsedDate = new Date();
+        try{
+            DateFormat sourceFormat = new SimpleDateFormat("dd-MM-yyyy");
+            parsedDate = sourceFormat.parse(date);
+        }catch(ParseException exception){
+            try{
+                DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+                parsedDate = sourceFormat.parse(date);
+            }catch(ParseException e){} 
+        }
+        return parsedDate;
     }
 
 

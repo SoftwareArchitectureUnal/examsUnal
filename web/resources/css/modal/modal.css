@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : alej0
 */
 
-.modal-header, h4, .close {
+.modal-header, .close {
     background-color: #464D57;
     color:white !important;
     text-align: center;
@@ -17,14 +17,16 @@ and open the template in the editor.
 .modal-footer {
     background-color: #f9f9f9;
 }
-#modal-signup, #modal-login{
-    top:10%;
-    right:0%;
-    outline: none;
+.modal-body {
+    padding: 8% !important;
 }
-.modal .modal-body{
+.modal-small{
     padding: 8%;
 }
+.modal-large{
+    padding: 3%;
+}
+
 @media screen and (min-width: 768px) {
     .modal .modal-dialog  {width:450px;}
 }

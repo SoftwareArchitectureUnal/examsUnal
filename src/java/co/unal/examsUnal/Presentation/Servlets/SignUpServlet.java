@@ -38,7 +38,7 @@ public class SignUpServlet extends HttpServlet {
             }
         }else{
             req.setAttribute("signUp", "error");
-            req.getRequestDispatcher("/signUp.jsp").forward(req, resp);
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
         }
     }
 

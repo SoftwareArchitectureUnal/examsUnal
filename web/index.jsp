@@ -13,9 +13,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Exámenes</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/login.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/modal/modal.css">
     </head>
-    
+    <c:if test="${login!=null}" >
+        <c:if test="${login.equals('error')}" >
+            <div class="alert alert-info" style="position: absolute; top: 40%; left: 45%;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" style="color: #000;">&times;</span></button>
+                <strong>Error!</strong> No se pudo hacer el Login &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <c:set var="login" value="null"></c:set>
+        </c:if>
+    </c:if>
+    <c:if test="${signUp!=null}" >
+        <c:if test="${signUp.equals('error')}" >
+            <div class="alert alert-info" style="position: absolute; top: 40%; left: 45%;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" style="color: #000;">&times;</span></button>
+                <strong>Error!</strong> No se pudo hacer el Registro &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <c:set var="signUp" value="null"></c:set>
+            </div>
+        </c:if>
+    </c:if>
     <body style="background-image: url('${pageContext.request.contextPath}/resources/images/home-bg.jpg'); background-repeat: no-repeat; background-size: 100% 100% 100% 100%">
         <div class="navbar-wrapper">
             <div class="container-fluid">
@@ -38,7 +55,7 @@
                                     <li><a href="${pageContext.request.contextPath}/index.jsp">${user.getIdAuthentication()}</a></li>
                                 </c:if>
                                 <c:if test="${admin!=null}">
-                                    <li><a href="${pageContext.request.contextPath}/index.jsp">Admin</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/index.jsp">Admin</a></li>
                                 </c:if>
                                 <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
                                 <c:choose>
@@ -76,8 +93,8 @@
             </div>
         </div>
         
-        <div class="modal fade" id="modal-login" role="dialog">
-            <div class="modal-dialog modal-sm">
+        <div class="modal fade modal-small" id="modal-login" role="dialog">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -110,7 +127,7 @@
             </div>
         </div>
         
-        <div class="modal fade" id="modal-signup" role="dialog">
+        <div class="modal fade modal-large" id="modal-signup" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="">

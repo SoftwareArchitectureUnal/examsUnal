@@ -6,13 +6,13 @@
 package co.unal.examsUnal.BusinessLogic.Service;
 
 import co.unal.examsUnal.BusinessLogic.Controller.Management.ExamController;
-import co.unal.examsUnal.Utilities.Util.ExamResult;
-import co.unal.examsUnal.Utilities.Util.ExamUser;
+import co.unal.examsUnal.Utilities.Util.ExamData;
+import co.unal.examsUnal.Utilities.Util.UserExamResult;
 import co.unal.examsUnal.Utilities.Util.UserResult;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 
 /**
  *
@@ -23,23 +23,20 @@ public class UsersExams {
 
     /**
      * This is a sample web service operation
+     * @return 
      */
     @WebMethod(operationName = "getUsers")
-    public String getUsers(/*@WebParam(name = "name") String txt*/) {
+    public ArrayList<UserExamResult> getUsers(/*@WebParam(name = "name") String txt*/) {
         ExamController examController = new ExamController();
         Collection<UserResult> usersResults = examController.getUsersResults();
-        String results = "";
-        String exams;
-        for(UserResult userResult: usersResults){
-            results += "$$" + userResult.getUser().getName() + "&&" + userResult.getUser().getEmail()+ "&&"; //+ userResult.getExamsUser() + "&&" + examResult.getFailed()
-            exams = "";
-            for( ExamUser examUser: userResult.getExamsUser() ){
-                exams += "%%" + examUser.getExam().getName() + "%%" + examUser.getExam().getDescription() + "%%" + examUser.isApproved();
-            }
-            exams = exams.length() > 2 ? exams.substring(2) : "";
-            results += exams;
-        }
-        results = results.length() > 2 ? results.substring(2) : "";
-        return results;
+        ArrayList<UserExamResult> userExamResults = new ArrayList<>();
+        usersResults.stream().forEach((userResult) -> {
+            ArrayList<ExamData> examsData = new ArrayList<>();
+            userResult.getExamsUser().stream().forEach((examUser) -> {
+                examsData.add( new ExamData(examUser.getExam().getName(), examUser.getExam().getDescription(), examUser.isApproved()) );
+            });
+            userExamResults.add( new UserExamResult(userResult.getUser().getName(), userResult.getUser().getEmail(), examsData) );
+        });
+        return userExamResults;
     }
 }

@@ -14,6 +14,7 @@
         <title>Exámenes</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/modal/modal.css">
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/signUp.js"></script>
     </head>
     <c:if test="${login!=null}" >
         <c:if test="${login.equals('error')}" >
@@ -111,7 +112,7 @@
                                 </div>
                             </div><br/>
                             <div class="input-group">
-                                <input type="password" id="inputPassword" name="inputPassword" onchange="checkPassword()" class="form-control input-lg"
+                                <input type="password" id="inputPassword-login" name="inputPassword" class="form-control input-lg"
                                    placeholder="Contraseña" required />
                                 <div class="input-group-addon" style="background-color: #464D57; color: #fff;">
                                     <span class="glyphicon glyphicon-lock"></span>
@@ -177,7 +178,7 @@
                                     <option value="1">M</option>
                                     <option value="2">F</option>
                                 </select>
-                                <div id="btn-password" class="input-group-addon" style="background-color: #464D57; color: #fff;">
+                                <div class="input-group-addon" style="background-color: #464D57; color: #fff;">
                                     <span class="glyphicon glyphicon-user"></span>
                                 </div>
                             </div><br/>
@@ -186,7 +187,7 @@
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>
-                                <div id="btn-password" class="input-group-addon" style="background-color: #464D57; color: #fff;">
+                                <div class="input-group-addon" style="background-color: #464D57; color: #fff;">
                                     <span class="glyphicon glyphicon-info-sign"></span>
                                 </div>
                             </div><br/>
@@ -222,6 +223,5 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script> 
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/dropdown.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/signUp.js"></script>
     </body>
 </html>

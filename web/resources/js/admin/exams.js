@@ -30,7 +30,7 @@ $(document).ready(function() {
     
     $("#close-modal").click( function(){
         $("#modal-saved").hide();
-        alert("hola");
+        //alert("hola");
     });  
     //setInterval(function(){ alert("Hello"); }, 1000);
     

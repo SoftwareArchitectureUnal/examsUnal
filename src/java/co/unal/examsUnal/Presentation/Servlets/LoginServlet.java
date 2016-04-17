@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginServlet extends HttpServlet {
     public void handleRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         String username = req.getParameter("inputUsername");
-        String password = req.getParameter("inputPassword-login");
+        String password = req.getParameter("inputPassword");
         UserController userController = new UserController();
         User user = userController.login(username, password);
         if(user!=null){//The login was successful

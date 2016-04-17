@@ -11,6 +11,7 @@ import co.unal.examsUnal.Utilities.Util.UserExamResult;
 import co.unal.examsUnal.Utilities.Util.UserResult;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.ejb.Stateless;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 

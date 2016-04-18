@@ -7,7 +7,6 @@ package co.unal.examsUnal.Presentation.Servlets;
 
 import co.unal.examsUnal.BusinessLogic.Controller.Management.ExamController;
 import co.unal.examsUnal.BusinessLogic.Controller.User.UserController;
-import co.unal.examsUnal.DataAccess.DAO.ExamDAO;
 import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.User;
 import java.io.IOException;

@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Exámenes</title>
+        <link rel="icon" type="image/jpg" href="${pageContext.request.contextPath}/resources/images/favicon.jpg" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/modal/modal.css">
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/signUp.js"></script>
@@ -53,7 +54,7 @@
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <c:if test="${user!=null}">
-                                    <li><a href="${pageContext.request.contextPath}/index.jsp">${user.getIdAuthentication()}</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/user/index.jsp">${user.getIdAuthentication()}</a></li>
                                 </c:if>
                                 <c:if test="${admin!=null}">
                                     <li><a href="${pageContext.request.contextPath}/admin/index.jsp">Admin</a></li>
@@ -112,7 +113,7 @@
                                 </div>
                             </div><br/>
                             <div class="input-group">
-                                <input type="password" id="inputPassword-login" name="inputPassword" class="form-control input-lg"
+                                <input type="password" id="inputPassword-login" name="inputPassword-login" class="form-control input-lg"
                                    placeholder="Contraseña" required />
                                 <div class="input-group-addon" style="background-color: #464D57; color: #fff;">
                                     <span class="glyphicon glyphicon-lock"></span>
@@ -203,7 +204,7 @@
                 <div class="col-lg-12">
                     <div class="intro-message">
                         <h1>Exams UN</h1>
-                        <h3>Plataforma para inscribirse a exámenes de competencias y consultar resultados</h3>
+                        <h3 style="color: #fff">Plataforma para inscribirse a exámenes de competencias y consultar resultados</h3>
                         <!--<hr class="intro-divider">-->
                     </div>
                 </div>

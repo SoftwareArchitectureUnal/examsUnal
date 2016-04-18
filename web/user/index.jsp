@@ -19,10 +19,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Exams</title>
+        <link rel="icon" type="image/jpg" href="${pageContext.request.contextPath}/resources/images/favicon.jpg" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/modal/modal.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
+        <!--<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dataTables/css/dataTables.bootstrap.min.css" type="text/css">
     </head>
     <body>
         <c:if test="${admin!=null}">
@@ -46,21 +49,33 @@
             <div class="tab-content">
                 <div id="exam-register" class="tab-pane fade in active">
                     <form action="./RegisterExamServlet" method="post">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" style="padding: 12px;">
                         <!-- Default panel contents -->
-                            <div class="panel-heading">Examenes</div>
+                            <div class="panel-heading">Examenes</div><br/><br/>
                             <!-- Table -->
-                            <table class="display table table-striped table-bordered table-hover">
+                            <table id="table-exams-user" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                                 <%
                                     Collection<Pair<Exam, Boolean>> lista = ExamRegisterController.ExamsUser(((User)session.getAttribute("user")).getIdAuthentication());
                                     Boolean flag;
                                     Exam exam;
-                                    out.println("<tr>");
-                                        out.println("<th>Nombre             </th>");
-                                        out.println("<th>Descripción        </th>");
-                                        out.println("<th>Fecha           </th>");
-                                        out.println("<th>Inscribir           </th>");
+                                    out.println("<thead>");
+                                        out.print("<tr>");
+                                            out.print("<th>Exámenes</th>");
+                                        out.print("</tr>");
+                                        out.println("<tr>");
+                                            out.println("<th style='text-align: center;'>Nombre</th>");
+                                            out.println("<th style='text-align: center;'>Descripción</th>");
+                                            out.println("<th style='text-align: center;'>Fecha</th>");
+                                            out.println("<th style='text-align: center;'>Inscribir</th>");
                                         out.println("</tr>");
+                                    out.println("</thead>");
+                                    out.println("<tfoot>");
+                                        out.println("<tr>");
+                                            out.println("<th style='text-align: center;'>Nombre</th>");
+                                            out.println("<th style='text-align: center;'>Certificado</th>");
+                                        out.println("</tr>");
+                                    out.println("</tfoot>");
+                                    out.println("<tbody>");
                                     Date auxDate;
                                     for( Pair myPair : lista)
                                     {
@@ -83,6 +98,7 @@
                                         }
                                         out.println("</tr>");
                                     }
+                                    out.println("</tbody>");
                                 %>
                             </table>
                         </div>    
@@ -90,26 +106,40 @@
                     </form>  
                 </div>
                 <div id="show-certified" class="tab-pane fade">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" style="padding: 12px;">
                     <!-- Default panel contents -->
-                        <div class="panel-heading">Certificados</div>
+                        <div class="panel-heading">Certificados</div><br/><br/>
                         <!-- Table -->
-                        <table class="table">        
+                        <table id="table-certificates" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                             <% 
                                 User myUser = (User)session.getAttribute("user"); 
                                 ArrayList<Exam> myExams = (ArrayList)CertificationController.getPasExamsofUser(myUser.getIdAuthentication());
-                                out.print("<tr>");
-                                out.print("<th>Exámenes</th>");
-                                out.print("</tr>");
-                                for( int i = 0; i < myExams.size(); i++ ){
-                                   out.print("<tr>");
-                                   out.print("<td>"+(myExams.get(i).getName())+"</th>");
-                                   out.print("<td> <form action=\"./CertificationServlet\" method=\"post\"> "
-                                           + "<input type=\"hidden\" name=\"nameExam\" value=\""+myExams.get(i).getName()+"\">"
-                                           + "<button type = \"submit\" class = \"btn btn-primary\" name=\"bt\" >Certificado</button>"
-                                           + "</form> </th>");
-                                   out.print("</tr>");
-                                }
+                                out.println("<thead>");
+                                    out.print("<tr>");
+                                        out.print("<th>Exámenes</th>");
+                                    out.print("</tr>");
+                                    out.println("<tr>");
+                                        out.println("<th style='text-align: center;'>Nombre</th>");
+                                        out.println("<th style='text-align: center;'>Certificado</th>");
+                                    out.println("</tr>");
+                                out.println("</thead>");
+                                out.println("<tfoot>");
+                                    out.println("<tr>");
+                                        out.println("<th style='text-align: center;'>Nombre</th>");
+                                        out.println("<th style='text-align: center;'>Certificado</th>");
+                                    out.println("</tr>");
+                                out.println("</tfoot>");
+                                out.println("<tbody>");
+                                    for( int i = 0; i < myExams.size(); i++ ){
+                                       out.print("<tr>");
+                                       out.print("<td>"+(myExams.get(i).getName())+"</td>");
+                                       out.print("<td style='text-align: center;'> <form action=\"./CertificationServlet\" method=\"post\" target=\"_blank\"> "
+                                               + "<input type=\"hidden\" name=\"nameExam\" value=\""+myExams.get(i).getName()+"\">"
+                                               + "<button type = \"submit\" class = \"btn btn-primary\" name=\"bt\" >Certificado</button>"
+                                               + "</form> </td>");
+                                       out.print("</tr>");
+                                    }
+                                out.println("</tbody>");
                             %>
                         </table>
                     </div>  
@@ -117,5 +147,10 @@
             </div>
         </div>
         <%@include file="/WEB-INF/jspf/footer.jspf"%>
+        <script src="${pageContext.request.contextPath}/resources/js/jquery/dist/jquery.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/resources/dataTables/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/resources/dataTables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/user/user.js" type="text/javascript"></script>
     </body>
 </html>

@@ -13,6 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Exámenes</title>
+        <link rel="icon" type="image/jpg" href="${pageContext.request.contextPath}/resources/images/favicon.jpg" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/modal/modal.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-ui.css" type="text/css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
@@ -192,7 +193,7 @@
                         %>
                     </table><br/><br/><br/>
                     <div class="col-md-3">
-                        <a href="${pageContext.request.contextPath}/admin/statistics.jsp"><button type="button" id="btn-statistics" class="btn btn-lg btn-primary btn-block">Estadísticas</button></a>
+                        <button type="button" id="btn-statistics" class="btn btn-lg btn-primary btn-block">Estadísticas</button>
                     </div>
                     <div class="col-md-3 col-md-offset-6">
                         <button type="button" id="btn-insert" class="btn btn-lg btn-primary btn-block">Nuevo</button><br/><br/>

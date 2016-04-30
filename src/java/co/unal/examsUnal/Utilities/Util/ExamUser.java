@@ -14,13 +14,20 @@ import co.unal.examsUnal.DataAccess.Entity.Exam;
 public class ExamUser {
     
     private Exam exam;
-    private boolean approved;
+    private String status;
     
-    public ExamUser(Exam exam, boolean approved){
+    public ExamUser(Exam exam, boolean approved, boolean presented){
         this.exam = exam;
-        this.approved = approved;
+        if( presented )
+            this.status = "PENDING";
+        else{
+            if(approved)
+                this.status = "PASS";
+            else
+                this.status = "FAIL";
+        }
     }
-    
+
     public Exam getExam() {
         return exam;
     }
@@ -29,11 +36,12 @@ public class ExamUser {
         this.exam = exam;
     }
 
-    public boolean isApproved() {
-        return approved;
+    public String getStatus() {
+        return status;
     }
 
-    public void setApproved(boolean approved) {
-        this.approved = approved;
+    public void setStatus(String status) {
+        this.status = status;
     }
+    
 }

@@ -13,38 +13,28 @@ import java.util.ArrayList;
  */
 public class UserExamResult {
     
-    private String name;
-    private String email;
-    private ArrayList<ExamData> examsData;
+    private String document;
+    private ArrayList<Tests> tests;
     
-    public UserExamResult( String name, String email, ArrayList<ExamData> examsData){
-        this.name = name;
-        this.email = email;
-        this.examsData = examsData;
+    public UserExamResult( String document, ArrayList<Tests> examsData){
+        this.document = document;
+        this.tests = examsData;
     }
 
-    public String getName() {
-        return name;
+    public String getDocument() {
+        return document;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDocument(String document) {
+        this.document = document;
+    }
+    
+    public ArrayList<Tests> getTests() {
+        return tests;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public ArrayList<ExamData> getExamsData() {
-        return examsData;
-    }
-
-    public void setExamsData(ArrayList<ExamData> examsData) {
-        this.examsData = examsData;
+    public void setTests(ArrayList<Tests> tests) {
+        this.tests = tests;
     }
     
 }

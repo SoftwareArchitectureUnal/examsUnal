@@ -5,11 +5,8 @@
  */
 package co.unal.examsUnal.BusinessLogic.Controller.Management;
 
-import co.unal.examsUnal.Utilities.Util.ExamData;
 import co.unal.examsUnal.Utilities.Util.ExamUser;
-import co.unal.examsUnal.Utilities.Util.UserExamResult;
 import co.unal.examsUnal.Utilities.Util.UserResult;
-import java.util.ArrayList;
 import java.util.Collection;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -53,7 +50,7 @@ public class UsersServiceResource {
             results += "$$" + userResult.getUser().getName() + "&&" + userResult.getUser().getEmail()+ "&&"; //+ userResult.getExamsUser() + "&&" + examResult.getFailed()
             exams = "";
             for( ExamUser examUser: userResult.getExamsUser() ){
-                exams += "%%" + examUser.getExam().getName() + "%%" + examUser.getExam().getDescription() + "%%" + examUser.isApproved();
+                exams += "%%" + examUser.getExam().getName() + "%%" + examUser.getExam().getDescription() + "%%" + examUser.getStatus();
             }
             exams = exams.length() > 2 ? exams.substring(2) : "";
             results += exams;

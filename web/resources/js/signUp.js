@@ -10,6 +10,6 @@ function checkPassword(){
     
 }
 $(document).ready(function (){
-  
+    
 });
 

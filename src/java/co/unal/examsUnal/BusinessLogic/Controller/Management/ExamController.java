@@ -120,23 +120,18 @@ public class ExamController {
         Collection<ResultExam> results = resultExamDAO.findAllRelation();
         ArrayList<User> users = new ArrayList<>();
         ArrayList<UserResult> usersResults = new ArrayList<>();
-        System.out.println(results.size());
         for(ResultExam result: results){
-            if(result.getStatus() == 1){
-                if( !users.contains(result.getIdUser()) ){
-                    users.add(result.getIdUser());
-                    UserResult userResult = new UserResult( result.getIdUser(), new ArrayList<>() );
-                    userResult.addExamUser( new ExamUser(result.getIdExam(), result.getApproved() == 1) );
-                    usersResults.add( userResult );
-                }else{
-                   System.out.println("hola2");
-                   for(UserResult userResult : usersResults){
-                       if( userResult.getUser().getIdAuthentication().equals( result.getIdUser().getIdAuthentication() ) ){
-                           userResult.addExamUser( new ExamUser(result.getIdExam(), result.getApproved() == 1) );
-                           System.out.println(userResult.getUser().getIdAuthentication());
-                       }
+            if( !users.contains(result.getIdUser()) ){
+                users.add(result.getIdUser());
+                UserResult userResult = new UserResult( result.getIdUser(), new ArrayList<>() );
+                userResult.addExamUser( new ExamUser(result.getIdExam(), result.getApproved() == 1, result.getStatus() == 1 ) );
+                usersResults.add( userResult );
+            }else{
+               for(UserResult userResult : usersResults){
+                   if( userResult.getUser().getIdAuthentication().equals( result.getIdUser().getIdAuthentication() ) ){
+                       userResult.addExamUser( new ExamUser(result.getIdExam(), result.getApproved() == 1, result.getStatus() == 1) );
                    }
-                }
+               }
             }
         }
         return usersResults;
@@ -147,7 +142,6 @@ public class ExamController {
         ExamDAO examDAO = new ExamDAO();
         Collection<ResultExam> results = resultExamDAO.findAllRelation();
         Exam exam = examDAO.findById(idExam);
-        System.out.println("exam controller id: " + exam.getExamId());
         ExamResult examResult = new ExamResult(exam, 0, 0);
         for(ResultExam result: results){
             if(result.getApproved() >= 0){

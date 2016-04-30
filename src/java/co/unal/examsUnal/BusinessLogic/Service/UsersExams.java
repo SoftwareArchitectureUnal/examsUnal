@@ -6,7 +6,7 @@
 package co.unal.examsUnal.BusinessLogic.Service;
 
 import co.unal.examsUnal.BusinessLogic.Controller.Management.ExamController;
-import co.unal.examsUnal.Utilities.Util.ExamData;
+import co.unal.examsUnal.Utilities.Util.Tests;
 import co.unal.examsUnal.Utilities.Util.UserExamResult;
 import co.unal.examsUnal.Utilities.Util.UserResult;
 import java.util.ArrayList;
@@ -23,20 +23,24 @@ public class UsersExams {
 
     /**
      * This is a sample web service operation
+     * @param document
      * @return 
      */
-    @WebMethod(operationName = "getUsers")
-    public ArrayList<UserExamResult> getUsers(/*@WebParam(name = "name") String txt*/) {
+    @WebMethod(operationName = "getUserByDoc")
+    public UserExamResult getUserByDoc(String document) {
         ExamController examController = new ExamController();
         Collection<UserResult> usersResults = examController.getUsersResults();
-        ArrayList<UserExamResult> userExamResults = new ArrayList<>();
-        usersResults.stream().forEach((userResult) -> {
-            ArrayList<ExamData> examsData = new ArrayList<>();
+        UserExamResult userExamResult = null;
+        for (UserResult userResult : usersResults){
+            ArrayList<Tests> tests = new ArrayList<>();
             userResult.getExamsUser().stream().forEach((examUser) -> {
-                examsData.add( new ExamData(examUser.getExam().getName(), examUser.getExam().getDescription(), examUser.isApproved()) );
+                tests.add(new Tests(examUser.getExam().getName(), examUser.getStatus(), examUser.getExam().getDescription() ) );
             });
-            userExamResults.add( new UserExamResult(userResult.getUser().getName(), userResult.getUser().getEmail(), examsData) );
-        });
-        return userExamResults;
+            if( userResult.getUser().getName().equals(document) ){
+                userExamResult = new UserExamResult(userResult.getUser().getName(), tests);
+            }
+        }
+        System.out.println("description " + userExamResult.getTests().get(0).getComment());
+        return userExamResult;
     }
 }

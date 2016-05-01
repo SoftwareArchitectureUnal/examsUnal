@@ -9,6 +9,7 @@ import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.ResultExam;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -62,8 +63,7 @@ public class ExamDAO {
         EntityManager em = emf.createEntityManager();
         Query query;
         try{
-            query = em.createNamedQuery("Exam.findByName").setParameter("name", name);
-            return (Exam)query.getSingleResult();
+            return em.createNamedQuery("Exam.findByName", Exam.class).setParameter("name", name).getSingleResult();
         }catch(Exception e){
             e.printStackTrace();
             return null;

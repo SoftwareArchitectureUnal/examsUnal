@@ -30,19 +30,27 @@ public class PostulateEmployee {
     @WebMethod(operationName = "postulate")
     public PostulateEmployeeResponseDto postulate(@WebParam(name = "parameter") PostulateEmployeeRequestDto parameter) {
         PostulateEmployeeResponseDto result = new PostulateEmployeeResponseDto();
-        UserController myUserController = new UserController();
-        PostulateEmployeeRequestDto.Employee myEmployee = parameter.getEmployee();
-        int gender = myEmployee.getGender().compareTo(PostulateEmployeeRequestDto.Gender.MALE) == 0 ? 1 : 0;
-        User myUser = myUserController.register(parameter.getUserName(), myEmployee.getFirstName()+" "+myEmployee.getLastName(), myEmployee.getEmail(), parameter.getPassword(), gender,"user");
-        ExamRegisterController myExamRC = new ExamRegisterController();
-        ExamController myExamC = new ExamController();
-        for( String nameExam : parameter.getFeatures()  )
+        int countFeatures = 0;
+        try
         {
-            myExamRC.RegisterExam( myUser, myExamC.findByName(nameExam));
+            UserController myUserController = new UserController();
+            PostulateEmployeeRequestDto.Employee myEmployee = parameter.getEmployee();
+            int gender = myEmployee.getGender().compareTo(PostulateEmployeeRequestDto.Gender.MALE) == 0 ? 1 : 0;         
+            User myUser = myUserController.register(parameter.getUserName(), myEmployee.getFirstName()+" "+myEmployee.getLastName(), myEmployee.getEmail(), parameter.getPassword(), gender,"user");
+            ExamRegisterController myExamRC = new ExamRegisterController();
+            ExamController myExamC = new ExamController();
+            for( String nameExam : parameter.getFeatures()  )
+            {
+                myExamRC.RegisterExam( myUser, myExamC.findByName(nameExam.trim()));
+                countFeatures++;
+            }
+            result.setSuccess(true);
+            result.setErrorMessage("");
+        }catch(Exception e)
+        {
+            result.setSuccess(false);
+            result.setErrorMessage("error in web service postulateEmployee, added features:"+countFeatures);
         }
-        //TODO
-        result.setSuccess(true);
-        result.setErrorMessage("");
         return result;
     }
 }

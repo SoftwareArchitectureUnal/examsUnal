@@ -6,13 +6,20 @@
 package co.unal.examsUnal.BusinessLogic.Service;
 
 import co.unal.examsUnal.BusinessLogic.Controller.Management.ExamController;
-import co.unal.examsUnal.Utilities.Util.Tests;
-import co.unal.examsUnal.Utilities.Util.UserExamResult;
+import co.unal.examsUnal.Utilities.Util.ExamUser;
+
 import co.unal.examsUnal.Utilities.Util.UserResult;
+import co.unal.examsUnal.Utilities.Util.VerifyEmployeesStatusRequestDto;
+import co.unal.examsUnal.Utilities.Util.VerifyEmployeesStatusResponseDto;
+import co.unal.examsUnal.Utilities.Util.VerifyEmployeesStatusResponseDto.ResultDto;
+import co.unal.examsUnal.Utilities.Util.VerifyEmployeesStatusResponseDto.TestResultDto;
+import co.unal.examsUnal.Utilities.Util.VerifyEmployeesStatusResponseDto.Status;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 
 /**
  *
@@ -27,20 +34,33 @@ public class UsersExams {
      * @return 
      */
     @WebMethod(operationName = "getUserByDoc")
-    public UserExamResult getUserByDoc(String document) {
+    public VerifyEmployeesStatusResponseDto getUserByDoc(@WebParam(name = "request") VerifyEmployeesStatusRequestDto request) {
+        List<String> documents = request.getEmployees();
         ExamController examController = new ExamController();
         Collection<UserResult> usersResults = examController.getUsersResults();
-        UserExamResult userExamResult = null;
+        VerifyEmployeesStatusResponseDto response = new VerifyEmployeesStatusResponseDto();
+        List<TestResultDto> tests;
+        List<ResultDto> resutls = new ArrayList<>();
         for (UserResult userResult : usersResults){
-            ArrayList<Tests> tests = new ArrayList<>();
-            userResult.getExamsUser().stream().forEach((examUser) -> {
-                tests.add(new Tests(examUser.getExam().getName(), examUser.getStatus(), examUser.getExam().getDescription() ) );
-            });
-            if( userResult.getUser().getName().equals(document) ){
-                userExamResult = new UserExamResult(userResult.getUser().getName(), tests);
+            tests = new ArrayList<>();
+            for(ExamUser examUser:userResult.getExamsUser()){
+                TestResultDto test = new TestResultDto();
+                test.setName(examUser.getExam().getName());
+                test.setComment(examUser.getExam().getDescription());
+                Status status = examUser.getStatus().equals("PENDING") ? Status.PENDING : examUser.getStatus().equals("PASS") ? Status.PASS: Status.FAIL;
+                test.setStatus(status);
+                tests.add(test);
+            }
+            for(String document:documents){
+                if( userResult.getUser().getName().equals(document.trim()) ){
+                    ResultDto result = new ResultDto();
+                    result.setDocument(document);
+                    result.setTests(tests);
+                    resutls.add(result);
+                }  
             }
         }
-        System.out.println("description " + userExamResult.getTests().get(0).getComment());
-        return userExamResult;
+        response.setResults(resutls);
+        return response;
     }
 }

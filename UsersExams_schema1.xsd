@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://Service.BusinessLogic.examsUnal.unal.co/" xmlns:tns="http://Service.BusinessLogic.examsUnal.unal.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getUserByDoc" nillable="true" type="tns:getUserByDoc"/>
+
+  <xs:element name="getUserByDocResponse" nillable="true" type="tns:getUserByDocResponse"/>
+
+  <xs:complexType name="getUserByDoc">
+    <xs:sequence>
+      <xs:element name="request" type="tns:verifyEmployeesStatusRequestDto" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="verifyEmployeesStatusRequestDto">
+    <xs:sequence>
+      <xs:element name="employees" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUserByDocResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:verifyEmployeesStatusResponseDto" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="verifyEmployeesStatusResponseDto">
+    <xs:sequence>
+      <xs:element name="results" type="tns:resultDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="resultDto">
+    <xs:sequence>
+      <xs:element name="document" type="xs:string" minOccurs="0"/>
+      <xs:element name="tests" type="tns:testResultDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="testResultDto">
+    <xs:sequence>
+      <xs:element name="comment" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="status" type="tns:status" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PASS"/>
+      <xs:enumeration value="FAIL"/>
+      <xs:enumeration value="PENDING"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

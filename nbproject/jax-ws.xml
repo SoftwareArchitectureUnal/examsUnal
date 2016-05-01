@@ -1,46 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
-    <service name="UsersExams">
-      <implementation-class>co.unal.examsUnal.BusinessLogic.Service.UsersExams</implementation-class>
+    <service name="VerifyEmployeesStatus">
+      <implementation-class>co.unal.examsUnal.BusinessLogic.Service.VerifyEmployeesStatus</implementation-class>
+    </service>
+    <service name="PostulateEmployee">
+      <implementation-class>co.unal.examsUnal.BusinessLogic.Service.PostulateEmployee</implementation-class>
     </service>
   </services>
-  <clients>
-    <client name="ExamsByUser">
-      <wsdl-url>http://alejandro:8080/HumanResources/ExamsByUser?wsdl</wsdl-url>
-      <local-wsdl-file>alejandro_8080/HumanResources/ExamsByUser.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">co.unal.examsUnal.BusinessLogic.ServiceClient</package-name>
-      <catalog-file>catalog.xml</catalog-file>
-      <wsimport-options>
-        <wsimport-option>
-          <wsimport-option-name>extension</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>verbose</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>fork</wsimport-option-name>
-          <wsimport-option-value>false</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://alejandro:8080/HumanResources/ExamsByUser?wsdl</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>xnocompile</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>xendorsed</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>co.unal.examsUnal.BusinessLogic.ServiceClient</wsimport-option-value>
-        </wsimport-option>
-      </wsimport-options>
-    </client>
-  </clients>
+  <clients/>
 </jax-ws>

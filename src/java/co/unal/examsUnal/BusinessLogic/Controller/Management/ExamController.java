@@ -71,6 +71,10 @@ public class ExamController {
         return examDAO.findById(id);
     }
     
+    public Exam findByName( String  name ){
+        ExamDAO examDAO = new ExamDAO();
+        return examDAO.findByName(name);
+    }
     public Collection<Exam> findExamsUser(String username){
         ExamDAO examDAO = new ExamDAO();
         return examDAO.findExamsUser(username);
@@ -123,7 +127,7 @@ public class ExamController {
         for(ResultExam result: results){
             if( !users.contains(result.getIdUser()) ){
                 users.add(result.getIdUser());
-                UserResult userResult = new UserResult( result.getIdUser(), new ArrayList<>() );
+                UserResult userResult = new UserResult( result.getIdUser(), new ArrayList<ExamUser>() );
                 userResult.addExamUser( new ExamUser(result.getIdExam(), result.getApproved() == 1, result.getStatus() == 1 ) );
                 usersResults.add( userResult );
             }else{

@@ -25,17 +25,16 @@ import javax.jws.WebParam;
  *
  * @author alej0
  */
-@WebService(serviceName = "UsersExams")
-public class UsersExams {
+@WebService(serviceName = "VerifyEmployeesStatus")
+public class VerifyEmployeesStatus {
+
 
     /**
-     * This is a sample web service operation
-     * @param document
-     * @return 
+     * Web service operation
      */
-    @WebMethod(operationName = "getUserByDoc")
-    public VerifyEmployeesStatusResponseDto getUserByDoc(@WebParam(name = "request") VerifyEmployeesStatusRequestDto request) {
-        List<String> documents = request.getEmployees();
+    @WebMethod(operationName = "verifyEmployees")
+    public VerifyEmployeesStatusResponseDto verifyEmployees(@WebParam(name = "parameter") VerifyEmployeesStatusRequestDto parameter) {
+        List<String> documents = parameter.getEmployees();
         ExamController examController = new ExamController();
         Collection<UserResult> usersResults = examController.getUsersResults();
         VerifyEmployeesStatusResponseDto response = new VerifyEmployeesStatusResponseDto();
@@ -64,3 +63,4 @@ public class UsersExams {
         return response;
     }
 }
+

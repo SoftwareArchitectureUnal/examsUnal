@@ -57,6 +57,18 @@ public class ExamDAO {
             return null;
         }
     }
+    
+    public Exam findByName( String name ) {
+        EntityManager em = emf.createEntityManager();
+        Query query;
+        try{
+            query = em.createNamedQuery("Exam.findByName").setParameter("name", name);
+            return (Exam)query.getSingleResult();
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
      
     public Exam insert(Exam exam){
         EntityManager em = emf.createEntityManager();

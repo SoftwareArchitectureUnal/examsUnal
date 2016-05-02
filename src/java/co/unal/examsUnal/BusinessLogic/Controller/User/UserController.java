@@ -31,6 +31,7 @@ public class UserController {
         return null;
         
     }
+    
     public User register(String userId,String name,String email,String password,
             int gender,String role){
         AuthenticationDAO authenticationDAO = new AuthenticationDAO();

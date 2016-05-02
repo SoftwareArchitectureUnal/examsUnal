@@ -31,25 +31,32 @@ public class PostulateEmployee {
     public PostulateEmployeeResponseDto postulate(@WebParam(name = "parameter") PostulateEmployeeRequestDto parameter) {
         PostulateEmployeeResponseDto result = new PostulateEmployeeResponseDto();
         int countFeatures = 0;
+        UserController myUserController = new UserController();
+        PostulateEmployeeRequestDto.Employee myEmployee = parameter.getEmployee();
+        int gender = myEmployee.getGender().compareTo(PostulateEmployeeRequestDto.Gender.MALE) == 0 ? 1 : 0; 
+
+        User myUser = myUserController.login(parameter.getUserName(), parameter.getPassword());
+        if ( myUser == null )
+            myUser = myUserController.register(parameter.getUserName(), myEmployee.getFirstName()+" "+myEmployee.getLastName(), myEmployee.getEmail(), parameter.getPassword(), gender,"user");
+        ExamRegisterController myExamRC = new ExamRegisterController();
+        ExamController myExamC = new ExamController();
+        Exam myExam;
         try
         {
-            UserController myUserController = new UserController();
-            PostulateEmployeeRequestDto.Employee myEmployee = parameter.getEmployee();
-            int gender = myEmployee.getGender().compareTo(PostulateEmployeeRequestDto.Gender.MALE) == 0 ? 1 : 0;         
-            User myUser = myUserController.register(parameter.getUserName(), myEmployee.getFirstName()+" "+myEmployee.getLastName(), myEmployee.getEmail(), parameter.getPassword(), gender,"user");
-            ExamRegisterController myExamRC = new ExamRegisterController();
-            ExamController myExamC = new ExamController();
             for( String nameExam : parameter.getFeatures()  )
-            {
-                myExamRC.RegisterExam( myUser, myExamC.findByName(nameExam.trim()));
+            {   
+                myExam = myExamC.findByName(nameExam.trim());
+                ExamRegisterController.unSubcribeExam( myUser.getIdAuthentication(), myExam.getExamId());
+                ExamRegisterController.RegisterExam( myUser, myExam);
                 countFeatures++;
             }
             result.setSuccess(true);
             result.setErrorMessage("");
-        }catch(Exception e)
+        }
+        catch(Exception e)
         {
             result.setSuccess(false);
-            result.setErrorMessage("error in web service postulateEmployee, added features:"+countFeatures);
+            result.setErrorMessage("error in web service postulateEmployee, feature was not found , added features:"+countFeatures);
         }
         return result;
     }

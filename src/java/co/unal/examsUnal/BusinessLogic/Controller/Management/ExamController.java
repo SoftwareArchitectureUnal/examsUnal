@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
@@ -90,7 +91,6 @@ public class ExamController {
         Collection<Exam> exams = examsDAO.findAllExams();
         ArrayList<ExamResult> examResults = new ArrayList<>();
         ArrayList<ExamResult> examResultsToRemove = new ArrayList<>();
-        ExamResult resultToRemove = new ExamResult();
         for(Exam exam: exams){
             examResults.add(new ExamResult(exam, 0, 0));
         }
@@ -98,11 +98,11 @@ public class ExamController {
             if(result.getStatus() == 1){
                 if(result.getApproved() == 1){
                     for(ExamResult examResult: examResults)
-                        if(result.getIdExam().getExamId() == examResult.getExam().getExamId())
+                        if(Objects.equals(result.getIdExam().getExamId(), examResult.getExam().getExamId()))
                             examResult.setPassed(examResult.getPassed()+1);
                 }else{
                     for(ExamResult examResult: examResults)
-                        if(examResult.getExam().getExamId() == result.getIdExam().getExamId())
+                        if(Objects.equals(examResult.getExam().getExamId(), result.getIdExam().getExamId()))
                             examResult.setFailed(examResult.getFailed()+1);
                 }
             }else{
@@ -125,13 +125,14 @@ public class ExamController {
     public Collection<UserResult> getUsersResults(){
         ResultExamDAO resultExamDAO = new ResultExamDAO();
         Collection<Resultexam> results = resultExamDAO.findAllRelation();
+        System.out.println("REsultados: " + results.size());
         List<User> users = new ArrayList<>();
         Map<String,List<ExamUser>> resultsTemp = new HashMap<>();
         ArrayList<UserResult> usersResults = new ArrayList<>();
         for(Resultexam result: results){
             if(!resultsTemp.containsKey(result.getIdUser().getDocument())){
                 users.add(result.getIdUser());
-                resultsTemp.put(result.getIdUser().getDocument(), new ArrayList<ExamUser>());
+                resultsTemp.put(result.getIdUser().getDocument(), new ArrayList<>());
             }else{
                 resultsTemp.get(result.getIdUser().getDocument()).add(new ExamUser(result.getIdExam(), result.getApproved() == 1, result.getStatus() == 1 ));
             }

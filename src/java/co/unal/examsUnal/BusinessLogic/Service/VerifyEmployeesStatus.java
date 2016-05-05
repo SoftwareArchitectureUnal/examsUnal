@@ -29,6 +29,8 @@ import javax.jws.WebParam;
 public class VerifyEmployeesStatus {
     /**
      * Web service operation
+     * @param parameter
+     * @return 
      */
     @WebMethod(operationName = "verifyEmployees")
     public VerifyEmployeesStatusResponseDto verifyEmployees(@WebParam(name = "parameter") VerifyEmployeesStatusRequestDto parameter) {

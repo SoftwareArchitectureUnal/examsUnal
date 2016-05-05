@@ -21,6 +21,7 @@ import javax.persistence.Query;
  */
 public class ResultExamDAO {
     public EntityManagerFactory emf = Persistence.createEntityManagerFactory("ExamsUnalPU");
+    
     public Collection<Resultexam>  findRelationByIdUser(String idUser)
     {
         EntityManager em = emf.createEntityManager();
@@ -106,6 +107,8 @@ public class ResultExamDAO {
             query = em.createNamedQuery("Resultexam.findAll");
             return (Collection<Resultexam>) query.getResultList();
         }catch(Exception e){
+            System.out.println("Exception result " + e);
+            e.printStackTrace();
             return null;
         }
     }

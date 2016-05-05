@@ -12,6 +12,7 @@ import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.User;
 import co.unal.examsUnal.Utilities.Util.PostulateEmployeeRequestDto;
 import co.unal.examsUnal.Utilities.Util.PostulateEmployeeResponseDto;
+import java.util.Arrays;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -26,6 +27,8 @@ public class PostulateEmployee {
 
     /**
      * Web service operation
+     * @param parameter
+     * @return 
      */
     @WebMethod(operationName = "postulate")
     public PostulateEmployeeResponseDto postulate(@WebParam(name = "parameter") PostulateEmployeeRequestDto parameter) {
@@ -46,8 +49,8 @@ public class PostulateEmployee {
             for( String nameExam : parameter.getFeatures()  )
             {   
                 myExam = myExamC.findByName(nameExam.trim());
-                ExamRegisterController.unSubcribeExam( myUser.getIdAuthentication(), myExam.getExamId());
-                ExamRegisterController.RegisterExam( myUser, myExam);
+                myExamRC.unSubcribeExam( myUser.getIdAuthentication(), myExam.getExamId());
+                myExamRC.RegisterExam( myUser, myExam);
                 countFeatures++;
             }
             result.setSuccess(true);
@@ -56,7 +59,7 @@ public class PostulateEmployee {
         catch(Exception e)
         {
             result.setSuccess(false);
-            result.setErrorMessage("error in web service postulateEmployee, feature was not found , added features:"+countFeatures);
+            result.setErrorMessage("error in web service postulateEmployee, feature was not found , added features:"+countFeatures + "\nException: " + Arrays.toString(e.getStackTrace()));
         }
         return result;
     }

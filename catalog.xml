@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://alejandro:8080/HumanResources/ExamsByUser?wsdl" uri="src/conf/xml-resources/web-service-references/ExamsByUser/wsdl/alejandro_8080/HumanResources/ExamsByUser.wsdl"/>
-    <system systemId="http://alejandro:8080/HumanResources/ExamsByUser?xsd=1" uri="src/conf/xml-resources/web-service-references/ExamsByUser/wsdl/alejandro_8080/HumanResources/ExamsByUser.xsd_1.xsd"/>
-</catalog>

@@ -28,12 +28,12 @@ import java.util.TreeSet;
  * @author yeisondavid
  */
 public class ExamRegisterController {
-        public static Collection<Exam> allExams()
+        public Collection<Exam> allExams()
        {
            ExamDAO myDao = new ExamDAO();
            return myDao.findAllExams();
        }
-       public static Collection<Pair<Exam, Boolean>> ExamsUser(String idUser)
+       public Collection<Pair<Exam, Boolean>> ExamsUser(String idUser)
        {
            ExamDAO myDao = new ExamDAO();
            ResultExamDAO myRelationDAO = new ResultExamDAO();
@@ -62,7 +62,7 @@ public class ExamRegisterController {
            }
            return result;
        }
-       public static void RegisterExam(User user, Exam exam)
+       public void RegisterExam(User user, Exam exam)
        {
            ResultExamDAO myRelationDAO = new ResultExamDAO();
            Resultexam myRelation = new Resultexam();
@@ -77,7 +77,7 @@ public class ExamRegisterController {
        }
        
        
-       public static void unSubcribeExam(String idUser, int idExam)
+       public void unSubcribeExam(String idUser, int idExam)
        {
            ResultExamDAO myRelationDAO = new ResultExamDAO();
            Collection<Resultexam> collection = myRelationDAO.findRelationByIdUser(idUser);

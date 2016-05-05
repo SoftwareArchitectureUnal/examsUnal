@@ -46,7 +46,8 @@ public class RegisterExamServlet extends HttpServlet {
             String value;
             Boolean flag;
             Pair auxP;
-            Collection<Pair<Exam, Boolean>> lista = ExamRegisterController.ExamsUser(myIdUser);
+            ExamRegisterController myExamRC = new ExamRegisterController();
+            Collection<Pair<Exam, Boolean>> lista = myExamRC.ExamsUser(myIdUser);
             Iterator<Pair<Exam,Boolean>> iter = lista.iterator();
             while( iter.hasNext())
             {
@@ -54,14 +55,15 @@ public class RegisterExamServlet extends HttpServlet {
                 flag = (Boolean)auxP.getValue();
                 auxExam = (Exam)auxP.getKey();
                 value = request.getParameter("checkb"+auxExam.getExamId());
+                
                 if ( value == null && flag)
                 {
                     System.out.println("unSubcribeExam");
-                    ExamRegisterController.unSubcribeExam(myIdUser, auxExam.getExamId());
+                    myExamRC.unSubcribeExam(myIdUser, auxExam.getExamId());
                 }    
                 else if ( value != null && !flag)
                 {
-                    ExamRegisterController.RegisterExam(myUser, auxExam);
+                    myExamRC.RegisterExam(myUser, auxExam);
                 }
                    
             }

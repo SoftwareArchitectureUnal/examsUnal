@@ -1,10 +1,10 @@
-DROP TABLE IF EXISTS `exam`;
 DROP TABLE IF EXISTS `resultexam`;
 DROP TABLE IF EXISTS `exambyquestion`;
+DROP TABLE IF EXISTS `exam`;
 DROP TABLE IF EXISTS `question`;
-DROP TABLE IF EXISTS `authentication`;
-DROP TABLE IF EXISTS `role`;
 DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `authentication`;
 
 CREATE TABLE `authentication`(
     `authenticationId` varchar(255) NOT NULL,

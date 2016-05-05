@@ -6,7 +6,7 @@
 package co.unal.examsUnal.DataAccess.DAO;
 
 import co.unal.examsUnal.DataAccess.Entity.Exam;
-import co.unal.examsUnal.DataAccess.Entity.ResultExam;
+import co.unal.examsUnal.DataAccess.Entity.Resultexam;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +26,7 @@ public class ExamDAO {
         EntityManager em = emf.createEntityManager();
         Query query;
         try{
-            query = em.createNativeQuery("SELECT * FROM Exam AS e INNER JOIN ResultExam AS r ON r.idExam=e.examId WHERE (r.idUser=? && (e.realizationDate<=DATE_ADD(CURDATE(),INTERVAL 2 DAY) && e.realizationDate>CURDATE()));",Exam.class);
+            query = em.createNativeQuery("SELECT * FROM exam AS e INNER JOIN resultexam AS r ON r.idExam=e.examId WHERE (r.idUser=? && (e.realizationDate<=DATE_ADD(CURDATE(),INTERVAL 2 DAY) && e.realizationDate>CURDATE()));",Exam.class);
             query.setParameter(1,userId);
             return query.getResultList();
         }catch(Exception e){

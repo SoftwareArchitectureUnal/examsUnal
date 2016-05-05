@@ -1,32 +1,33 @@
-DROP TABLE IF EXISTS `User`;
-DROP TABLE IF EXISTS `Authentication`;
-DROP TABLE IF EXISTS `Role`;
-DROP TABLE IF EXISTS `ExamByQuestion`;
-DROP TABLE IF EXISTS `ResultExam`;
-DROP TABLE IF EXISTS `Question`;
-DROP TABLE IF EXISTS `Exam`;
+DROP TABLE IF EXISTS `exam`;
+DROP TABLE IF EXISTS `resultexam`;
+DROP TABLE IF EXISTS `exambyquestion`;
+DROP TABLE IF EXISTS `question`;
+DROP TABLE IF EXISTS `authentication`;
+DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `user`;
 
-CREATE TABLE `Authentication`(
+CREATE TABLE `authentication`(
     `authenticationId` varchar(255) NOT NULL,
     `password` varchar(255) NOT NULL,
     PRIMARY KEY(`authenticationId`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE `Role`(
+CREATE TABLE `role`(
     `roleId` varchar(255) NOT NULL,
     `description` varchar(255) NOT NULL,
     PRIMARY KEY(`roleId`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE `User` (
+CREATE TABLE `user` (
     `name` varchar(255) NOT NULL,
-    `email` varchar(255) NOT NULL,
+    `document` varchar(255) UNIQUE NOT NULL,
+    `email` varchar(255) UNIQUE NOT NULL,
     `gender` int NOT NULL,
     `idRole` varchar(255) NOT NULL,
     `idAuthentication` varchar(255) NOT NULL,
-    FOREIGN KEY(idAuthentication) REFERENCES Authentication(authenticationId) ON DELETE CASCADE,
-    FOREIGN KEY(idRole) REFERENCES `Role`(roleId) ON DELETE CASCADE,
+    FOREIGN KEY(idAuthentication) REFERENCES authentication(authenticationId) ON DELETE CASCADE,
+    FOREIGN KEY(idRole) REFERENCES `role`(roleId) ON DELETE CASCADE,
     PRIMARY KEY(`idAuthentication`) 
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE `Exam`(
+CREATE TABLE `exam`(
     `examId` INT AUTO_INCREMENT,
     `name` varchar(255) NOT NULL UNIQUE,
     `realizationDate` date NOT NULL,
@@ -34,28 +35,28 @@ CREATE TABLE `Exam`(
     `certificationDate` date,
     `expeditionDate` date,
     PRIMARY KEY(`examId`)
-)ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
-CREATE TABLE `Question`(
+)ENGINE = InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `question`(
     `questionId` varchar(255) NOT NULL,
     `category` varchar(255) NOT NULL,
     `description` varchar(255) NOT NULL,
     PRIMARY KEY(`questionId`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE `ExamByQuestion`(
+CREATE TABLE `exambyquestion`(
     `examByQuestionId` int NOT NULL,
     `idQuestion` varchar(255) NOT NULL,
     `idExam` int NOT NULL,
-    FOREIGN KEY(idQuestion) REFERENCES Question(questionId),
-    FOREIGN KEY(idExam) REFERENCES Exam(examId),
+    FOREIGN KEY(idQuestion) REFERENCES question(questionId),
+    FOREIGN KEY(idExam) REFERENCES exam(examId),
     PRIMARY KEY(`examByQuestionId`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE `ResultExam`(
+CREATE TABLE `resultexam`(
     `resultExamId` Int NOT NULL AUTO_INCREMENT,
     `idUser` varchar(255) NOT NULL,
     `idExam` int not null,
     `approved` int not NULL,
     `status` int not null,
-    FOREIGN KEY(idUser) REFERENCES `User`(idAuthentication),
-    FOREIGN KEY(idExam) REFERENCES Exam(examId),
+    FOREIGN KEY(idUser) REFERENCES `user`(idAuthentication),
+    FOREIGN KEY(idExam) REFERENCES `exam`(examId),
     PRIMARY KEY(`resultExamId`)
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;

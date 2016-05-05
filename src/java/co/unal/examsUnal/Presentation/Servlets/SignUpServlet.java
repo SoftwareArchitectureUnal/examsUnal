@@ -24,10 +24,11 @@ public class SignUpServlet extends HttpServlet {
         String name = (String) req.getParameter("inputName");
         String password = (String) req.getParameter("inputPassword");
         String email = (String) req.getParameter("inputEmail");
+        String document = (String) req.getParameter("inputUsername");
         int gender =  Integer.parseInt((String)req.getParameter("gender"));
         String role = (String) req.getParameter("role");
         UserController userController = new UserController();
-        User user = userController.register(username, name, email, password, gender, role);
+        User user = userController.register(username, name, email, password, gender, role,document);
         if(user!=null){// The register was successful
             if(role.equals("admin")){
                 req.getSession().setAttribute("admin", role);

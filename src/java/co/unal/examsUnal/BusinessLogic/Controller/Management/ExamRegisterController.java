@@ -8,7 +8,7 @@ package co.unal.examsUnal.BusinessLogic.Controller.Management;
 import co.unal.examsUnal.DataAccess.DAO.ExamDAO;
 import co.unal.examsUnal.DataAccess.DAO.ResultExamDAO;
 import co.unal.examsUnal.DataAccess.Entity.Exam;
-import co.unal.examsUnal.DataAccess.Entity.ResultExam;
+import co.unal.examsUnal.DataAccess.Entity.Resultexam;
 import co.unal.examsUnal.DataAccess.Entity.User;
 import co.unal.examsUnal.Utilities.Util.Pair;
 import java.util.Collection;
@@ -39,9 +39,9 @@ public class ExamRegisterController {
            ResultExamDAO myRelationDAO = new ResultExamDAO();
            Collection<Exam> myCollectionExams = myDao.findAllExams();
            System.out.println(":::::::: "+idUser);
-           Collection<ResultExam> myCollectionRelation = myRelationDAO.findRelationByIdUser(idUser);
+           Collection<Resultexam> myCollectionRelation = myRelationDAO.findRelationByIdUser(idUser);
            TreeSet<Integer> mySet = new TreeSet<Integer>();
-           for( ResultExam myRelation : myCollectionRelation )
+           for( Resultexam myRelation : myCollectionRelation )
            {
                mySet.add(myRelation.getIdExam().getExamId());
            }
@@ -65,7 +65,7 @@ public class ExamRegisterController {
        public static void RegisterExam(User user, Exam exam)
        {
            ResultExamDAO myRelationDAO = new ResultExamDAO();
-           ResultExam myRelation = new ResultExam();
+           Resultexam myRelation = new Resultexam();
            myRelation.setApproved(0);
            myRelation.setStatus(0);
            
@@ -80,8 +80,8 @@ public class ExamRegisterController {
        public static void unSubcribeExam(String idUser, int idExam)
        {
            ResultExamDAO myRelationDAO = new ResultExamDAO();
-           Collection<ResultExam> collection = myRelationDAO.findRelationByIdUser(idUser);
-           for( ResultExam myRelation : collection)
+           Collection<Resultexam> collection = myRelationDAO.findRelationByIdUser(idUser);
+           for( Resultexam myRelation : collection)
            {
                if ( myRelation.getIdExam().getExamId() == idExam)
                {

@@ -6,6 +6,7 @@
 package co.unal.examsUnal.Utilities.Util;
 
 import co.unal.examsUnal.DataAccess.Entity.Exam;
+import co.unal.examsUnal.Utilities.Util.VerifyEmployeesStatusResponseDto.Status;
 
 /**
  *
@@ -14,17 +15,17 @@ import co.unal.examsUnal.DataAccess.Entity.Exam;
 public class ExamUser {
     
     private Exam exam;
-    private String status;
+    private Status status;
     
     public ExamUser(Exam exam, boolean approved, boolean presented){
         this.exam = exam;
         if( !presented )
-            this.status = "PENDING";
+            this.status = Status.PENDING;
         else{
             if(approved)
-                this.status = "PASS";
+                this.status = Status.PASS;
             else
-                this.status = "FAIL";
+                this.status = Status.FAIL;
         }
     }
 
@@ -36,11 +37,11 @@ public class ExamUser {
         this.exam = exam;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
     

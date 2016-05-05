@@ -37,7 +37,7 @@ public class PostulateEmployee {
 
         User myUser = myUserController.login(myEmployee.getDocument(), "password");
         if ( myUser == null )
-            myUser = myUserController.register(myEmployee.getDocument(),myEmployee.getDocument(), myEmployee.getEmail(), "password", gender,"user");
+            myUser = myUserController.register(myEmployee.getDocument(),myEmployee.getFirstName()+" "+myEmployee.getLastName(), myEmployee.getEmail(), "password", gender,"user",myEmployee.getDocument());
         ExamRegisterController myExamRC = new ExamRegisterController();
         ExamController myExamC = new ExamController();
         Exam myExam;

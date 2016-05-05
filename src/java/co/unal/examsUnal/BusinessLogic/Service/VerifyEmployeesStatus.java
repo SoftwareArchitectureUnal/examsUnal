@@ -27,8 +27,6 @@ import javax.jws.WebParam;
  */
 @WebService(serviceName = "VerifyEmployeesStatus")
 public class VerifyEmployeesStatus {
-
-
     /**
      * Web service operation
      */
@@ -46,12 +44,12 @@ public class VerifyEmployeesStatus {
                 TestResultDto test = new TestResultDto();
                 test.setName(examUser.getExam().getName());
                 test.setComment(examUser.getExam().getDescription());
-                Status status = examUser.getStatus().equals("PENDING") ? Status.PENDING : examUser.getStatus().equals("PASS") ? Status.PASS: Status.FAIL;
+                Status status = examUser.getStatus();
                 test.setStatus(status);
                 tests.add(test);
             }
             for(String document:documents){
-                if( userResult.getUser().getName().equals(document.trim()) ){
+                if( userResult.getUser().getDocument().equals(document.trim()) ){
                     ResultDto result = new ResultDto();
                     result.setDocument(document);
                     result.setTests(tests);

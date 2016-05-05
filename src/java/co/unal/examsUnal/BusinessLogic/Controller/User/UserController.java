@@ -33,7 +33,7 @@ public class UserController {
     }
     
     public User register(String userId,String name,String email,String password,
-            int gender,String role){
+            int gender,String role,String document){
         AuthenticationDAO authenticationDAO = new AuthenticationDAO();
         UserDAO userDAO = new UserDAO();
         RoleDAO roleDAO = new RoleDAO();
@@ -45,6 +45,7 @@ public class UserController {
         user.setName(name);
         user.setGender(gender);
         user.setEmail(email);
+        user.setDocument(document);
         user.setIdAuthentication(userId);
         if(userDAO.findUserByUserId(userId)!=null){
             return null;

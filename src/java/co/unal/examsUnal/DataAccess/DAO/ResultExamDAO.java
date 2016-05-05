@@ -6,7 +6,7 @@
 package co.unal.examsUnal.DataAccess.DAO;
 
 import co.unal.examsUnal.DataAccess.Entity.Exam;
-import co.unal.examsUnal.DataAccess.Entity.ResultExam;
+import co.unal.examsUnal.DataAccess.Entity.Resultexam;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
@@ -21,14 +21,14 @@ import javax.persistence.Query;
  */
 public class ResultExamDAO {
     public EntityManagerFactory emf = Persistence.createEntityManagerFactory("ExamsUnalPU");
-    public Collection<ResultExam>  findRelationByIdUser(String idUser)
+    public Collection<Resultexam>  findRelationByIdUser(String idUser)
     {
         EntityManager em = emf.createEntityManager();
         Query query;
         try
         {
             //query = em.createNamedQuery("ResultExam.findByIdUser").setParameter("idUser", idUser);
-            query = em.createNativeQuery("SELECT * FROM  ResultExam AS r  WHERE (r.idUser=? );",ResultExam.class);
+            query = em.createNativeQuery("SELECT * FROM  resultexam AS r  WHERE (r.idUser=? );",Resultexam.class);
             query.setParameter(1,idUser);
             return query.getResultList();
         }
@@ -38,7 +38,7 @@ public class ResultExamDAO {
         }
     }
     
-    public boolean deleteByRelationId(ResultExam relation) {
+    public boolean deleteByRelationId(Resultexam relation) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try{
@@ -57,8 +57,8 @@ public class ResultExamDAO {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try{
-            ArrayList<ResultExam> results = new ArrayList<>(findAllRelation());
-            for(ResultExam result : results){
+            ArrayList<Resultexam> results = new ArrayList<>(findAllRelation());
+            for(Resultexam result : results){
                 if( Objects.equals(result.getIdExam().getExamId(), exam.getExamId()) ){
                     result = em.merge(result);
                     em.remove(result);
@@ -73,7 +73,7 @@ public class ResultExamDAO {
         return true;
     }
     
-    public ResultExam insert(ResultExam relation){
+    public Resultexam insert(Resultexam relation){
         System.out.println("::: in insert");
         System.out.println(relation.getIdExam().getExamId());
         System.out.println(relation.getIdUser().getIdAuthentication());
@@ -84,8 +84,8 @@ public class ResultExamDAO {
             System.out.println("1");
             em.persist(relation);
             System.out.println("2");
-            relation.getIdExam().getResultExamCollection().add(relation);
-            relation.getIdUser().getResultExamCollection().add(relation);
+            relation.getIdExam().getResultexamCollection().add(relation);
+            relation.getIdUser().getResultexamCollection().add(relation);
             em.getTransaction().commit();
             em.merge(relation.getIdExam());
             em.merge(relation.getIdUser());
@@ -99,12 +99,12 @@ public class ResultExamDAO {
         return relation;
     }
     
-    public Collection<ResultExam> findAllRelation(){
+    public Collection<Resultexam> findAllRelation(){
         EntityManager em = emf.createEntityManager();
         Query query;
         try{
-            query = em.createNamedQuery("ResultExam.findAll");
-            return (Collection<ResultExam>) query.getResultList();
+            query = em.createNamedQuery("Resultexam.findAll");
+            return (Collection<Resultexam>) query.getResultList();
         }catch(Exception e){
             return null;
         }

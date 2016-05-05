@@ -7,6 +7,7 @@ package co.unal.examsUnal.Utilities.Util;
 
 import co.unal.examsUnal.DataAccess.Entity.User;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,9 +16,9 @@ import java.util.ArrayList;
 public class UserResult {
     
     private User user;
-    private ArrayList<ExamUser> examsUser = new ArrayList<>();
+    private List<ExamUser> examsUser = new ArrayList<>();
     
-    public UserResult(User user, ArrayList<ExamUser> examsUser){
+    public UserResult(User user, List<ExamUser> examsUser){
         this.user = user;
         this.examsUser = examsUser;
     }
@@ -30,7 +31,7 @@ public class UserResult {
         this.user = user;
     }
 
-    public ArrayList<ExamUser> getExamsUser() {
+    public List<ExamUser> getExamsUser() {
         return examsUser;
     }
 

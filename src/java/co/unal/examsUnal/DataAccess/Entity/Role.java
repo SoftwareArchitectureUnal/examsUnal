@@ -8,6 +8,7 @@ package co.unal.examsUnal.DataAccess.Entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author yeisondavid
+ * @author ArqSoft
  */
 @Entity
 @Table(name = "role")
@@ -40,10 +41,12 @@ public class Role implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "roleId")
     private String roleId;
-    @Size(max = 255)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "idRole")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRole")
     private Collection<User> userCollection;
 
     public Role() {
@@ -51,6 +54,11 @@ public class Role implements Serializable {
 
     public Role(String roleId) {
         this.roleId = roleId;
+    }
+
+    public Role(String roleId, String description) {
+        this.roleId = roleId;
+        this.description = description;
     }
 
     public String getRoleId() {

@@ -29,7 +29,6 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(co.unal.examsUnal.BusinessLogic.Controller.Management.UsersServiceResource.class);
     }
     
 }

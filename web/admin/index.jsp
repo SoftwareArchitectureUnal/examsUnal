@@ -4,6 +4,9 @@
     Author     : alej0
 --%>
 
+<%@page import="co.unal.examsUnal.Utilities.Util.VerifyEmployeesStatusResponseDto.Status"%>
+<%@page import="co.unal.examsUnal.Utilities.Util.UserResult"%>
+<%@page import="co.unal.examsUnal.Utilities.Util.ExamUser"%>
 <%@page import="co.unal.examsUnal.DataAccess.Entity.Exam"%>
 <%@page import="co.unal.examsUnal.BusinessLogic.Controller.Management.ExamController"%>
 <%@page import="java.util.Collection"%>
@@ -19,7 +22,6 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dataTables/css/dataTables.bootstrap.min.css" type="text/css">
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/chart/Chart.min.js"></script>
-        
     </head>
     <body>
         <div class="modal fade modal-small" id="modal-deleted" role="dialog">
@@ -193,11 +195,63 @@
                         %>
                     </table><br/><br/><br/>
                     <div class="col-md-3">
-                        <button type="button" id="btn-statistics" class="btn btn-lg btn-primary btn-block">Estadísticas</button>
+                        <button type="button" id="btn-statistics" class="btn btn-lg btn-primary btn-block">Estadisticas</button>
                     </div>
                     <div class="col-md-3 col-md-offset-6">
                         <button type="button" id="btn-insert" class="btn btn-lg btn-primary btn-block">Nuevo</button><br/><br/>
                     </div>
+                    
+                    <table id="table-grades" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                        <%
+                            Collection<UserResult> userResults = examController.getUsersResults();
+                            out.println("<thead>");
+                                out.println("<tr>");
+                                    out.println("<th style='text-align: center;'>Nombre</th>");
+                                    out.println("<th style='text-align: center;'>Examen</th>");
+                                    out.println("<th style='text-align: center;'>Descripción</th>");
+                                    out.println("<th style='text-align: center;'>Presentado</th>");
+                                    out.println("<th style='text-align: center;'>Aprobado</th>");
+                                out.println("</tr>");
+                            out.println("</thead>");
+                            out.println("<tfoot>");
+                                out.println("<tr>");
+                                    out.println("<th style='text-align: center;'>Nombre</th>");
+                                    out.println("<th style='text-align: center;'>Examen</th>");
+                                    out.println("<th style='text-align: center;'>Descripción</th>");
+                                    out.println("<th style='text-align: center;'>Presentado</th>");
+                                    out.println("<th style='text-align: center;'>Aprobado</th>");
+                                out.println("</tr>");
+                            out.println("</tfoot>");
+
+                            out.println("<tbody>");
+                            for( UserResult userResult : userResults){
+                                /*out.println("<tr class=\"group\" >");
+                                    out.println("<td colspan=\"4\">" + userResult.getUser().getName() + " CC: " + userResult.getUser().getDocument() + "</td>");
+                                out.println("</tr>");*/
+                                for( ExamUser examUser : userResult.getExamsUser() ){
+                                    out.println("<tr>");
+                                        out.println("<td>"+userResult.getUser().getName()+"</td>");
+                                        out.println("<td>"+examUser.getExam().getName()+"</td>");
+                                        out.println("<td>"+examUser.getExam().getDescription()+"</td>");
+                                        int presentedValue = examUser.getStatus().equals(Status.PENDING) ? 0 : 1;
+                                        int gradedValue = examUser.getStatus().equals(Status.PASS) ? 1 : 0;
+                                        if(presentedValue == 0){
+                                            out.println("<td style='text-align: center;'><input class='check-presented' type='checkbox' id='"+userResult.getUser().getIdAuthentication()+'-'+examUser.getExam().getExamId()+"' value='" + presentedValue +"'></td>");
+                                            out.println("<td style='text-align: center;'><input class='check-grade' type='checkbox' id='graded-"+userResult.getUser().getIdAuthentication()+'-'+examUser.getExam().getExamId()+"' value='" + gradedValue +"' disabled></td>");
+                                        }else{
+                                            out.println("<td style='text-align: center;'><input checked='true' class='check-presented' type='checkbox' id='"+userResult.getUser().getIdAuthentication()+'-'+examUser.getExam().getExamId()+"' value='" + presentedValue +"'></td>");
+                                            if(gradedValue == 0)
+                                                out.println("<td style='text-align: center;'><input class='check-grade' type='checkbox' id='graded-"+userResult.getUser().getIdAuthentication()+'-'+examUser.getExam().getExamId()+"' value='" + gradedValue +"'></td>");
+                                            else
+                                                out.println("<td style='text-align: center;'><input checked='true' class='check-grade' type='checkbox' id='graded-"+userResult.getUser().getIdAuthentication()+'-'+examUser.getExam().getExamId()+"' value='" + gradedValue +"'></td>");
+                                        }
+                                    out.println("</tr>");
+                                }
+                            }
+                            out.println("</tbody>");
+                        %>
+                    </table><br/><br/><br/>
+                    <div class="col-md-12"><br/><br/><br/><br/></div>
                     
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#certified-users" id="tab-certified-users">Usuarios certificados</a></li>
@@ -252,7 +306,6 @@
                 </div>
             </div>
         </div>
-        
         <script src="${pageContext.request.contextPath}/resources/js/jquery/dist/jquery.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-ui.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/jquery-ui/jquery-ui.min.js"></script>
@@ -260,5 +313,6 @@
         <script src="${pageContext.request.contextPath}/resources/dataTables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/admin/exams.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/admin/grade.js"></script>
     </body>
 </html>

@@ -209,7 +209,19 @@ $(document).ready(function() {
     }
     
     $("#btn-statistics").click(function () {
-        
+        alert("hola");
+        $.ajax({
+            type: "post",
+            url: "AdminExamsServlet",
+            data: {
+                method: "grade"
+            },
+            success: function(){ 
+            },
+            error: function(msg,textStatus, errorThrown){
+                alert("Error "+errorThrown);
+            }
+        });
     });
     
     $("#btn-load").click(function () {
@@ -439,4 +451,5 @@ $(document).ready(function() {
         //$('#legend-registered-chart').append(legend);
     }
 });
+
 

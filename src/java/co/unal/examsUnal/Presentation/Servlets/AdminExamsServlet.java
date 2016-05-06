@@ -6,6 +6,8 @@
 package co.unal.examsUnal.Presentation.Servlets;
 
 import co.unal.examsUnal.BusinessLogic.Controller.Management.ExamController;
+import co.unal.examsUnal.BusinessLogic.Controller.Management.ExamRegisterController;
+import co.unal.examsUnal.BusinessLogic.Controller.User.UserController;
 import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.Utilities.Util.ExamResult;
 import java.io.IOException;
@@ -37,6 +39,8 @@ public class AdminExamsServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -217,6 +221,52 @@ public class AdminExamsServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        if(method.equals("disableExam")){
+            try{
+                int examValue = request.getParameter("value").equals("true") ? 1 : 0;
+                String data = request.getParameter("data");
+                System.out.println("Data approve: " + data);
+                System.out.println("Value approve: " + examValue);
+                
+                UserController userController = new UserController();
+                String userId = userController.getUserByUserId( data.split("-")[0] ).getIdAuthentication();
+                
+                ExamController examController = new ExamController();
+                int examId = examController.findById( Integer.parseInt(data.split("-")[1]) ).getExamId();
+                
+                ExamRegisterController examRegisterController = new ExamRegisterController();
+                examRegisterController.examPresentedStatus(userId, examId, examValue);
+                
+                PrintWriter out = response.getWriter();
+                out.print("Estado: " + examValue);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        
+        if(method.equals("gradeExam")){
+            try{
+                int examValue = request.getParameter("value").equals("true") ? 1 : 0;
+                String data = request.getParameter("data");
+                System.out.println("Data grade: " + data);
+                System.out.println("Value grade: " + examValue);
+                
+                UserController userController = new UserController();
+                String userId = userController.getUserByUserId( data.split("-")[1] ).getIdAuthentication();
+                
+                ExamController examController = new ExamController();
+                int examId = examController.findById( Integer.parseInt(data.split("-")[2]) ).getExamId();
+                
+                ExamRegisterController examRegisterController = new ExamRegisterController();
+                examRegisterController.examGrade(userId, examId, examValue);
+                
+                PrintWriter out = response.getWriter();
+                out.print("Estado: " + examValue);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        
         processRequest(request, response);
     }
     

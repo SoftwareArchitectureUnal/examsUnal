@@ -111,7 +111,7 @@ INSERT INTO user (document,name, email, gender, idRole,idAuthentication) VALUES 
 
 /*Exams*/
 
-Insert Into exam (name, expeditionDate, realizationDate, certificationDate, description) values("Scrum Máster", '2017-2-04', '2017-2-24', '2017-2-28', "Examen para rol de Scrum Máster");
+Insert Into exam (name, expeditionDate, realizationDate, certificationDate, description) values("Scrum Master", '2017-2-04', '2017-2-24', '2017-2-28', "Examen para rol de Scrum Master");
 Insert Into exam (name, expeditionDate, realizationDate, certificationDate, description) values("Desarrollador", '2017-2-04', '2017-2-24', '2017-2-28', "Examen para hacer parte del equipo de desarrollo");
 Insert Into exam (name, expeditionDate, realizationDate, certificationDate, description) values("Consultor ITIL", '2017-2-14', '2017-3-04', '2017-3-18', "Examen para consultor organizacional especializado en ITIL");
 Insert Into exam (name, expeditionDate, realizationDate, certificationDate, description) values("Consultor eTOM", '2017-2-15', '2017-3-05', '2017-3-18', "Examen para consultor organizacional especializado en eTOM");
@@ -222,4 +222,3 @@ Insert Into resultexam (idUser, idExam, approved, status) values ("alejandro9", 
 Insert Into resultexam (idUser, idExam, approved, status) values ("alejandro10", 5, 1, 1);
 Insert Into resultexam (idUser, idExam, approved, status) values ("alejandro11", 5, 1, 1);
 Insert Into resultexam (idUser, idExam, approved, status) values ("alejandro12", 5, 1, 1);
-

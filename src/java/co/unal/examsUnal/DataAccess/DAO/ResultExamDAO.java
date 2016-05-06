@@ -112,4 +112,25 @@ public class ResultExamDAO {
             return null;
         }
     }
+    
+    public Resultexam update(Resultexam resultExam){
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try{
+            Resultexam resulExamUpdate = em.find(Resultexam.class, resultExam.getResultExamId() );
+            resulExamUpdate.setApproved(resultExam.getApproved());
+            resulExamUpdate.setIdExam(resultExam.getIdExam());
+            resulExamUpdate.setIdUser(resultExam.getIdUser());
+            resulExamUpdate.setResultExamId(resultExam.getResultExamId());
+            resulExamUpdate.setStatus(resultExam.getStatus());
+            em.getTransaction().commit();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            return null;
+        }finally{
+            em.close();
+        }
+        return resultExam;
+    }
+    
 }

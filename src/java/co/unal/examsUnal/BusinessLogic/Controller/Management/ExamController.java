@@ -13,7 +13,6 @@ import co.unal.examsUnal.DataAccess.Entity.User;
 import co.unal.examsUnal.Utilities.Util.ExamResult;
 import co.unal.examsUnal.Utilities.Util.ExamUser;
 import co.unal.examsUnal.Utilities.Util.UserResult;
-import com.sun.faces.action.RequestMapping;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;

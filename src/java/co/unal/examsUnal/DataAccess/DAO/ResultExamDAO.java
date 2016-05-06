@@ -21,6 +21,7 @@ import javax.persistence.Query;
  */
 public class ResultExamDAO {
     public EntityManagerFactory emf = Persistence.createEntityManagerFactory("ExamsUnalPU");
+    
     public Collection<Resultexam>  findRelationByIdUser(String idUser)
     {
         EntityManager em = emf.createEntityManager();
@@ -86,9 +87,10 @@ public class ResultExamDAO {
             System.out.println("2");
             relation.getIdExam().getResultexamCollection().add(relation);
             relation.getIdUser().getResultexamCollection().add(relation);
-            em.getTransaction().commit();
             em.merge(relation.getIdExam());
             em.merge(relation.getIdUser());
+            em.getTransaction().commit();
+            //em.flush();
         }catch(Exception e){
             em.getTransaction().rollback();
             System.out.println("fail");
@@ -106,7 +108,32 @@ public class ResultExamDAO {
             query = em.createNamedQuery("Resultexam.findAll");
             return (Collection<Resultexam>) query.getResultList();
         }catch(Exception e){
+            System.out.println("Exception result " + e);
+            e.printStackTrace();
             return null;
         }
     }
+    
+    public Resultexam update(Resultexam resultExam){
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try{
+            /*Resultexam resulExamUpdate = em.find(Resultexam.class, resultExam.getResultExamId() );
+            resulExamUpdate.setApproved(resultExam.getApproved());
+            resulExamUpdate.setIdExam(resultExam.getIdExam());
+            resulExamUpdate.setIdUser(resultExam.getIdUser());
+            resulExamUpdate.setResultExamId(resultExam.getResultExamId());
+            resulExamUpdate.setStatus(resultExam.getStatus());*/
+            em.merge(resultExam);
+            em.getTransaction().commit();
+            em.flush();
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            return null;
+        }finally{
+            em.close();
+        }
+        return resultExam;
+    }
+    
 }

@@ -19,7 +19,7 @@ public class ExamUser {
     
     public ExamUser(Exam exam, boolean approved, boolean presented){
         this.exam = exam;
-        if( !presented )
+        if(!presented)
             this.status = Status.PENDING;
         else{
             if(approved)

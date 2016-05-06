@@ -55,7 +55,8 @@
                             <!-- Table -->
                             <table id="table-exams-user" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                                 <%
-                                    Collection<Pair<Exam, Boolean>> lista = ExamRegisterController.ExamsUser(((User)session.getAttribute("user")).getIdAuthentication());
+                                    ExamRegisterController myExamRC = new ExamRegisterController();
+                                    Collection<Pair<Exam, Boolean>> lista = myExamRC.ExamsUser(((User)session.getAttribute("user")).getIdAuthentication());
                                     Boolean flag;
                                     Exam exam;
                                     out.println("<thead>");
@@ -79,7 +80,6 @@
                                     Date auxDate;
                                     for( Pair myPair : lista)
                                     {
-
                                         exam = (Exam)myPair.getKey();
                                         auxDate = exam.getRealizationDate();
                                         if ( auxDate.compareTo(new Date()) == -1) continue;
@@ -144,9 +144,9 @@
                         </table>
                     </div>  
                 </div>
+                <div class="col-md-12"><br/><br/><br/><br/></div>
             </div>
         </div>
-        <%@include file="/WEB-INF/jspf/footer.jspf"%>
         <script src="${pageContext.request.contextPath}/resources/js/jquery/dist/jquery.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/resources/dataTables/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/resources/dataTables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>

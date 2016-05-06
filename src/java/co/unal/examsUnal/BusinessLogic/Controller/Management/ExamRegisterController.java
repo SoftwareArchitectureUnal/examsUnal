@@ -11,24 +11,18 @@ import co.unal.examsUnal.DataAccess.Entity.Exam;
 import co.unal.examsUnal.DataAccess.Entity.Resultexam;
 import co.unal.examsUnal.DataAccess.Entity.User;
 import co.unal.examsUnal.Utilities.Util.Pair;
-import java.util.Collection;
-
-
-
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-
-
 /**
  *
  * @author yeisondavid
  */
 public class ExamRegisterController {
-        public static Collection<Exam> allExams()
+        public Collection<Exam> allExams()
        {
            ExamDAO myDao = new ExamDAO();
            return myDao.findAllExams();
@@ -74,6 +68,40 @@ public class ExamRegisterController {
            myRelation.setIdUser(user);
            
            myRelationDAO.insert(myRelation);
+       }
+       
+       public void examPresentedStatus(String idUser, int idExam, int value){
+           ResultExamDAO myRelationDAO = new ResultExamDAO();
+           Collection<Resultexam> collection = myRelationDAO.findRelationByIdUser(idUser);
+           Resultexam resultExam = new Resultexam();
+           for( Resultexam myRelation : collection)
+           {
+               if ( myRelation.getIdExam().getExamId() == idExam)
+               {
+                    myRelation.setStatus(value);
+                    if(value == 0)
+                        myRelation.setApproved(value);
+                    resultExam = myRelation;
+                    break;
+               }
+           }
+           myRelationDAO.update(resultExam);
+       }
+       
+       public void examGrade(String idUser, int idExam, int value){
+           ResultExamDAO myRelationDAO = new ResultExamDAO();
+           Collection<Resultexam> collection = myRelationDAO.findRelationByIdUser(idUser);
+           Resultexam resultExam = new Resultexam();
+           for( Resultexam myRelation : collection)
+           {
+               if ( myRelation.getIdExam().getExamId() == idExam )
+               {
+                    myRelation.setApproved(value);
+                    resultExam = myRelation;
+                    break;
+               }
+           }
+           myRelationDAO.update(resultExam);
        }
        
        

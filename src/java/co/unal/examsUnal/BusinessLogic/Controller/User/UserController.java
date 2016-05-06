@@ -17,6 +17,7 @@ import co.unal.examsUnal.DataAccess.Entity.User;
  * @author AndresGutierrez
  */
 public class UserController {
+   
     public User login(String userId,String password){
         User user = null;
         UserDAO userDAO = new UserDAO();
@@ -54,5 +55,10 @@ public class UserController {
         Role  roleUser = roleDAO.findRoleByRoleId(role);
         User userTemp = userDAO.persist(user, roleUser,authentication);
         return userTemp;
+    }
+    
+    public User getUserByUserId(String userId){
+        UserDAO userDAO = new UserDAO();
+        return userDAO.findUserByUserId(userId);
     }
 }

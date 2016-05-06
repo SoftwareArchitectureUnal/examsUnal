@@ -13,7 +13,6 @@ import co.unal.examsUnal.DataAccess.Entity.User;
 import co.unal.examsUnal.Utilities.Util.ExamResult;
 import co.unal.examsUnal.Utilities.Util.ExamUser;
 import co.unal.examsUnal.Utilities.Util.UserResult;
-import com.sun.faces.action.RequestMapping;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -122,6 +121,8 @@ public class ExamController {
         return examResults;
     }
     
+   
+    
     public Collection<UserResult> getUsersResults(){
         ResultExamDAO resultExamDAO = new ResultExamDAO();
         Collection<Resultexam> results = resultExamDAO.findAllRelation();
@@ -131,9 +132,13 @@ public class ExamController {
         for(Resultexam result: results){
             if(!resultsTemp.containsKey(result.getIdUser().getDocument())){
                 users.add(result.getIdUser());
-                resultsTemp.put(result.getIdUser().getDocument(), new ArrayList<ExamUser>());
+                List<ExamUser> init = new ArrayList<ExamUser>();
+                init.add(new ExamUser(result.getIdExam(), result.getApproved()==1, result.getStatus()==1 ));
+                resultsTemp.put(result.getIdUser().getDocument(), init);
             }else{
-                resultsTemp.get(result.getIdUser().getDocument()).add(new ExamUser(result.getIdExam(), result.getApproved() == 1, result.getStatus() == 1 ));
+                List<ExamUser> exams = resultsTemp.get(result.getIdUser().getDocument());
+                exams.add(new ExamUser(result.getIdExam(), result.getApproved()==1, result.getStatus()==1 ));
+                resultsTemp.put(result.getIdUser().getDocument(), exams);
             }
         }
         for(String i: resultsTemp.keySet()){

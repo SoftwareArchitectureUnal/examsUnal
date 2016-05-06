@@ -31,7 +31,6 @@ public class UserDAO {
             em.merge(role);
             em.merge(authentication);
             em.getTransaction().commit();
-            
         }catch(Exception e){
             em.getTransaction().rollback();
             System.out.println("algo1");

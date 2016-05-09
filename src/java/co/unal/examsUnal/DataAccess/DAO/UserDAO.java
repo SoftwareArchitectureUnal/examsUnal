@@ -5,7 +5,6 @@
  */
 package co.unal.examsUnal.DataAccess.DAO;
 
-import co.unal.examsUnal.DataAccess.Entity.Authentication;
 import co.unal.examsUnal.DataAccess.Entity.Role;
 import co.unal.examsUnal.DataAccess.Entity.User;
 import javax.persistence.EntityManager;
@@ -20,16 +19,14 @@ public class UserDAO {
     public EntityManagerFactory emf = 
             Persistence.createEntityManagerFactory("ExamsUnalPU");
     
-    public User persist(User user,Role role,Authentication authentication){
+    public User persist(User user,Role role){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try{
             em.persist(user);
             user.setIdRole(role);
             role.getUserCollection().add(user);
-            authentication.setUser(user);
             em.merge(role);
-            em.merge(authentication);
             em.getTransaction().commit();
         }catch(Exception e){
             em.getTransaction().rollback();

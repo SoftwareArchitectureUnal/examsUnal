@@ -24,7 +24,7 @@ public class SignUpServlet extends HttpServlet {
         String name = (String) req.getParameter("inputName");
         String password = (String) req.getParameter("inputPassword");
         String email = (String) req.getParameter("inputEmail");
-        String document = (String) req.getParameter("inputUsername");
+        String document = (String) req.getParameter("inputDocument");
         int gender =  Integer.parseInt((String)req.getParameter("gender"));
         String role = (String) req.getParameter("role");
         UserController userController = new UserController();

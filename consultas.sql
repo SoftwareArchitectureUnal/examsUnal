@@ -5,18 +5,6 @@ Insert into role (roleId, description) values ("user", "Usuario");
 
 /* Usuarios */
 
-insert into authentication (authenticationId, password) Values ('alejandro1', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro2', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro3', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro4', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro5', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro6', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro7', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro8', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro9', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro10', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro11', '123456789');
-insert into authentication (authenticationId, password) Values ('alejandro12', '123456789');
 
 INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES ('1022342001','Alejandro', 'prueba1@mail.com',  1, 'user', 'alejandro1');
 INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES ('1022342002', 'Alejandro1', 'prueba2@mail.com',  1, 'user', 'alejandro2');
@@ -31,18 +19,6 @@ INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES
 INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES ('1022342011', 'Alejandro10', 'prueba11@mail.com',  1, 'user', 'alejandro11');
 INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES ('1022342012', 'Alejandro11', 'prueba12@mail.com',  1, 'user', 'alejandro12');
 
-insert into authentication (authenticationId, password) Values ('andres1', '123456789');
-insert into authentication (authenticationId, password) Values ('andres2', '123456789');
-insert into authentication (authenticationId, password) Values ('andres3', '123456789');
-insert into authentication (authenticationId, password) Values ('andres4', '123456789');
-insert into authentication (authenticationId, password) Values ('andres5', '123456789');
-insert into authentication (authenticationId, password) Values ('andres6', '123456789');
-insert into authentication (authenticationId, password) Values ('andres7', '123456789');
-insert into authentication (authenticationId, password) Values ('andres8', '123456789');
-insert into authentication (authenticationId, password) Values ('andres9', '123456789');
-insert into authentication (authenticationId, password) Values ('andres10', '123456789');
-insert into authentication (authenticationId, password) Values ('andres11', '123456789');
-insert into authentication (authenticationId, password) Values ('andres12', '123456789');
 
 INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES ('1022343001', 'andres', 'prueba13@mail.com',  1, 'user', 'andres1');
 INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES ('1022343002', 'andres1', 'prueba14@mail.com',  1, 'user', 'andres2');
@@ -57,18 +33,6 @@ INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES
 INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES ('1022343011', 'andres10', 'prueba23@mail.com',  1, 'user', 'andres11');
 INSERT INTO user (document, name, email, gender, idRole,idAuthentication) VALUES ('1022343012', 'andres11', 'prueba24@mail.com',  1, 'user', 'andres12');
 
-insert into authentication (authenticationId, password) Values ('yeison1', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison2', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison3', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison4', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison5', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison6', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison7', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison8', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison9', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison10', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison11', '123456789');
-insert into authentication (authenticationId, password) Values ('yeison12', '123456789');
 
 INSERT INTO user (documemt,name, email, gender, idRole,idAuthentication) VALUES ('1022344001', 'yeison', 'prueba25@mail.com',  1, 'user', 'yeison1');
 INSERT INTO user (document,name, email, gender, idRole,idAuthentication) VALUES ('1022344002', 'yeison1', 'prueba26@mail.com',  1, 'user', 'yeison2');
@@ -83,18 +47,6 @@ INSERT INTO user (document,name, email, gender, idRole,idAuthentication) VALUES 
 INSERT INTO user (document,name, email, gender, idRole,idAuthentication) VALUES ('1022344011', 'yeison10', 'prueba35@mail.com',  1, 'user', 'yeison11');
 INSERT INTO user (document,name, email, gender, idRole,idAuthentication) VALUES ('1022344012',  'yeison11','prueba36@mail.com',  1, 'user', 'yeison12');
 
-insert into authentication (authenticationId, password) Values ('fernando1', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando2', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando3', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando4', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando5', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando6', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando7', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando8', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando9', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando10', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando11', '123456789');
-insert into authentication (authenticationId, password) Values ('fernando12', '123456789');
 
 INSERT INTO user (document,name, email, gender, idRole,idAuthentication) VALUES ('1022345001', 'fernando', 'prueba37@mail.com',  1, 'user', 'fernando1');
 INSERT INTO user (document,name, email, gender, idRole,idAuthentication) VALUES ('1022345002', 'fernando1', 'prueba38@mail.com',  1, 'user', 'fernando2');

@@ -5,43 +5,40 @@
  */
 package co.unal.examsUnal.BusinessLogic.Controller.User;
 
-import co.unal.examsUnal.DataAccess.DAO.AuthenticationDAO;
 import co.unal.examsUnal.DataAccess.DAO.RoleDAO;
 import co.unal.examsUnal.DataAccess.DAO.UserDAO;
-import co.unal.examsUnal.DataAccess.Entity.Authentication;
 import co.unal.examsUnal.DataAccess.Entity.Role;
 import co.unal.examsUnal.DataAccess.Entity.User;
+import co.unal.examsUnal.Utilities.Util.LDAPFunctions;
 
 /**
  *
  * @author AndresGutierrez
  */
 public class UserController {
-   
+    
+            
     public User login(String userId,String password){
         User user = null;
         UserDAO userDAO = new UserDAO();
-        AuthenticationDAO authenticationDAO = new AuthenticationDAO();
-        Authentication authentication = authenticationDAO.findAutenticationByID(userId);
-        if(authentication!=null){
-            user = userDAO.findUserByUserId(userId);
-            if(authentication.getPassword().equals(password)){ //Login was successful
+        LDAPFunctions authentication = new LDAPFunctions();
+        user = userDAO.findUserByUserId(userId);
+        if(user!=null){
+            if(authentication.login(userId, password).equals("user") || 
+                    authentication.login(userId, password).equals("admin")){ //Login was successful
                 return user;
             }
         }
+            
         return null;
         
     }
     
     public User register(String userId,String name,String email,String password,
             int gender,String role,String document){
-        AuthenticationDAO authenticationDAO = new AuthenticationDAO();
+        
         UserDAO userDAO = new UserDAO();
         RoleDAO roleDAO = new RoleDAO();
-        Authentication authentication = new Authentication();
-        authentication.setAuthenticationId(userId);
-        authentication.setPassword(password);
-        authenticationDAO.persist(authentication);
         User user = new User();
         user.setName(name);
         user.setGender(gender);
@@ -52,9 +49,15 @@ public class UserController {
             return null;
         }
         
-        Role  roleUser = roleDAO.findRoleByRoleId(role);
-        User userTemp = userDAO.persist(user, roleUser,authentication);
-        return userTemp;
+        
+        LDAPFunctions register = new LDAPFunctions();
+        if(register.addUser(role, userId, password)){
+            Role  roleUser = roleDAO.findRoleByRoleId(role);
+            User userTemp = userDAO.persist(user, roleUser);
+            return userTemp;
+        }
+        return null;
+        
     }
     
     public User getUserByUserId(String userId){

@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -67,9 +66,6 @@ public class User implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "idAuthentication")
     private String idAuthentication;
-    @JoinColumn(name = "idAuthentication", referencedColumnName = "authenticationId", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Authentication authentication;
     @JoinColumn(name = "idRole", referencedColumnName = "roleId")
     @ManyToOne(optional = false)
     private Role idRole;
@@ -129,14 +125,6 @@ public class User implements Serializable {
 
     public void setIdAuthentication(String idAuthentication) {
         this.idAuthentication = idAuthentication;
-    }
-
-    public Authentication getAuthentication() {
-        return authentication;
-    }
-
-    public void setAuthentication(Authentication authentication) {
-        this.authentication = authentication;
     }
 
     public Role getIdRole() {

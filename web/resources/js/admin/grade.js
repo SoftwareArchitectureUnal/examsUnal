@@ -34,6 +34,7 @@ $(document).ready(function() {
             { "visible": false, "targets": 0 }
         ],
         "order": [[ 0, 'asc' ]],
+        "pageLength": 100,
         "drawCallback": function ( settings ) {
             var api = this.api();
             var rows = api.rows( {page:'current'} ).nodes();

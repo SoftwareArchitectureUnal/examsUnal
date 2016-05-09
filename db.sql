@@ -2,15 +2,9 @@ DROP TABLE IF EXISTS `exam`;
 DROP TABLE IF EXISTS `resultexam`;
 DROP TABLE IF EXISTS `exambyquestion`;
 DROP TABLE IF EXISTS `question`;
-DROP TABLE IF EXISTS `authentication`;
 DROP TABLE IF EXISTS `role`;
 DROP TABLE IF EXISTS `user`;
 
-CREATE TABLE `authentication`(
-    `authenticationId` varchar(255) NOT NULL,
-    `password` varchar(255) NOT NULL,
-    PRIMARY KEY(`authenticationId`)
-)ENGINE = InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `role`(
     `roleId` varchar(255) NOT NULL,
     `description` varchar(255) NOT NULL,
@@ -23,7 +17,6 @@ CREATE TABLE `user` (
     `gender` int NOT NULL,
     `idRole` varchar(255) NOT NULL,
     `idAuthentication` varchar(255) NOT NULL,
-    FOREIGN KEY(idAuthentication) REFERENCES authentication(authenticationId) ON DELETE CASCADE,
     FOREIGN KEY(idRole) REFERENCES `role`(roleId) ON DELETE CASCADE,
     PRIMARY KEY(`idAuthentication`) 
 )ENGINE = InnoDB DEFAULT CHARSET=utf8;

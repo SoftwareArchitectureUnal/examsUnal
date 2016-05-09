@@ -147,7 +147,7 @@
                                 </div>
                             </div><br/>
                             <div class="input-group">
-                                <input type="text" id="inputUsername" name="inputDocument" class="form-control input-lg"
+                                <input type="text" id="inputDocument" name="inputDocument" class="form-control input-lg"
                                    placeholder="Cedula" required autofocus>
                                 <div class="input-group-addon" style="background-color: #464D57; color: #fff;">
                                     <span class="glyphicon glyphicon-user"></span>

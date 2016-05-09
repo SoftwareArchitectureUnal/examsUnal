@@ -35,7 +35,7 @@ public class PostulateEmployee {
         PostulateEmployeeRequestDto.Employee myEmployee = parameter.getEmployee();
         int gender = myEmployee.getGender().compareTo(PostulateEmployeeRequestDto.Gender.MALE) == 0 ? 1 : 0; 
 
-        User myUser = myUserController.login(myEmployee.getDocument(), "password");
+        User myUser = myUserController.getUserByUserId(myEmployee.getDocument());
         if ( myUser == null )
             myUser = myUserController.register(myEmployee.getDocument(),myEmployee.getFirstName()+" "+myEmployee.getLastName(), myEmployee.getEmail(), "password", gender,"user",myEmployee.getDocument());
         ExamRegisterController myExamRC = new ExamRegisterController();

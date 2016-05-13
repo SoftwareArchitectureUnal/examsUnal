@@ -35,7 +35,7 @@ public class ResultExamDAO {
         }
         catch(Exception e)
         {
-            return null;
+            return new ArrayList<>();
         }
     }
     

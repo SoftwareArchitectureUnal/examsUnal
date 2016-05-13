@@ -30,7 +30,8 @@ public class UserDAO {
             em.getTransaction().commit();
         }catch(Exception e){
             em.getTransaction().rollback();
-            System.out.println("algo1");
+            System.out.println(user.getEmail()+" "+user.getIdAuthentication()+" "+user.getDocument());
+            System.out.println(role.getRoleId());
             user = null;
         }finally{
             em.close();

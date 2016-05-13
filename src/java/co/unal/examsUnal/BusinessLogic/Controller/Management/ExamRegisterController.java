@@ -39,12 +39,12 @@ public class ExamRegisterController {
            {
                mySet.add(myRelation.getIdExam().getExamId());
            }
-           Iterator iter = myCollectionExams.iterator();
+           //Iterator iter = myCollectionExams.iterator();
            Exam myExam;
            Collection result = new ArrayList<Pair<Exam, Boolean>>();
-           while( iter.hasNext())
+           for(Exam e:myCollectionExams)
            {
-               myExam = (Exam)iter.next();
+               myExam = e;
                if ( mySet.contains(myExam.getExamId()))
                {
                    result.add( new Pair(myExam, true));

@@ -22,6 +22,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginServlet extends HttpServlet {
     public void handleRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        if(req.getSession().getAttribute("admin")!=null){
+            req.getRequestDispatcher("/admin/index.jsp").forward(req, resp);
+        }
+        if(req.getSession().getAttribute("user")!=null){
+            req.getRequestDispatcher("/user/index.jsp").forward(req, resp);
+
+        }
         String username = req.getParameter("inputUsername");
         String password = req.getParameter("inputPassword-login");
         UserController userController = new UserController();

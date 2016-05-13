@@ -59,7 +59,7 @@ $(document).ready(function() {
     $('#btn-save').click(function(){
         $.ajax({
             type: "post",
-            url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+            url: "AdminExamsServlet",
             data: {
                 method: "insertExam",
                 name: $('#exam-name').val(),
@@ -86,7 +86,7 @@ $(document).ready(function() {
         $("#id-up").text(id);
         $.ajax({
             type: "post",
-            url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+            url: "AdminExamsServlet",
             data: {
                 method: "findExam",
                 id: id
@@ -107,7 +107,7 @@ $(document).ready(function() {
     $('#btn-update').click(function(){
         $.ajax({
             type: "post",
-            url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+            url: "AdminExamsServlet",
             data: {
                 method: "updateExam",
                 id: $("#id-up").text(),
@@ -132,7 +132,7 @@ $(document).ready(function() {
     $('.btn-delete').click(function(){
         $.ajax({
             type: "post",
-            url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+            url: "AdminExamsServlet",
             data: {
                 method: "deleteExam",
                 id: $(this).attr('id')
@@ -179,7 +179,7 @@ $(document).ready(function() {
     
     $.ajax({
         type: "post",
-        url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+        url: "AdminExamsServlet",
         data: {
             method: "findAllExams"
         },
@@ -212,7 +212,7 @@ $(document).ready(function() {
         alert("hola");
         $.ajax({
             type: "post",
-            url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+            url: "AdminExamsServlet",
             data: {
                 method: "grade"
             },
@@ -231,7 +231,7 @@ $(document).ready(function() {
         else{
             $.ajax({
                 type: "post",
-                url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+                url: "AdminExamsServlet",
                 data: {
                     method: "examResult", 
                     id: selectedExam.split(" - ")[0]
@@ -274,7 +274,7 @@ $(document).ready(function() {
         var examsFailed = [];
         $.ajax({
             type: "post",
-            url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+            url: "AdminExamsServlet",
             data: {
                 method: "examsResults"
             },
@@ -303,7 +303,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: "post",
-            url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+            url: "AdminExamsServlet",
             data: {
                 method: "examsRegistered"
             },
@@ -328,7 +328,7 @@ $(document).ready(function() {
         var examsFailed = [];
         $.ajax({
             type: "post",
-            url: "http://localhost:8080/examsUnal/AdminExamsServlet",
+            url: "AdminExamsServlet",
             data: {
                 method: "examsResults"
             },

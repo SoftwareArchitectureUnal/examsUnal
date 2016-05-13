@@ -11,4 +11,5 @@
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/examsdb" object-type="user" pool-name="mysql_examsdb_rootPool"/>
+    <jdbc-resource enabled="true" jndi-name="java:app/examsdb" object-type="user" pool-name="mysql_examsdb_rootPool"/>
 </resources>

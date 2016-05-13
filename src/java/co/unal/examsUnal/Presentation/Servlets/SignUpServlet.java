@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SignUpServlet extends HttpServlet {
     
     public void handleRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        String username = (String) req.getParameter("inputUsername");
+        String username = (String) req.getParameter("inputUsername1");
         String name = (String) req.getParameter("inputName");
         String password = (String) req.getParameter("inputPassword");
         String email = (String) req.getParameter("inputEmail");

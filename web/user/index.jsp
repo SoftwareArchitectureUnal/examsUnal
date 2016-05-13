@@ -35,7 +35,7 @@
         </c:if>
         <c:if test="${user==null}">
             <%
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
             %>
         </c:if>
         

@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * and opfen the template in the editor.
  */
 package co.unal.examsUnal.Utilities.Util;
 
@@ -92,6 +92,7 @@ public class LDAPFunctions {
             System.out.println("Error in MD5 function");
             Logger.getLogger(LDAPFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //String dn = "cn="+idAuthentication+",ou=examsUnal,dc=ocs,dc=com";
         String dn = "cn="+idAuthentication+",ou=examsUnal,dc=arqsoft,dc=com";
         LDAPEntry newEntry = new LDAPEntry( dn, attributeSet );
         boolean conected = conectar();
@@ -109,7 +110,7 @@ public class LDAPFunctions {
                 System.out.println("Error discconecting LDAP server");
                 Logger.getLogger(LDAPFunctions.class.getName()).log(Level.SEVERE, null, ex);
             }
-            login(idAuthentication, password); // no lo quiten.
+            //login(idAuthentication, password); // no lo quiten.
             return true;
         }
         return false;
@@ -150,8 +151,10 @@ public class LDAPFunctions {
     }
     private Boolean conectar(){
 
-        String ldapHost = "127.0.0.1";
-        String dn = "cn=admin,dc=arqsoft,dc=com";
+        //String ldapHost = "LDAP";
+        String ldapHost = "20.0.2.23";
+        //String dn = "cn=admin,dc=ocs,dc=com";
+        String dn ="cn=admin,dc=arqsoft,dc=com";
         String password = "ArqSoft2016i";
 
         int ldapPort =  LDAPConnection.DEFAULT_PORT;
@@ -172,6 +175,7 @@ public class LDAPFunctions {
 
     private String validarContrasena(String nombreUsuario, String contrasena){
 
+            //String dn = "cn="+nombreUsuario+",ou=examsUnal,dc=ocs,dc=com";
             String dn = "cn="+nombreUsuario+",ou=examsUnal,dc=arqsoft,dc=com";
         try {
             lc.bind(dn, contrasena);

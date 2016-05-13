@@ -20,10 +20,11 @@ import javax.persistence.Query;
  * @author AndresGutierrez
  */
 public class ExamDAO {
-        public EntityManagerFactory emf = Persistence.createEntityManagerFactory("ExamsUnalPU");
+    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("ExamsUnalPU");
 
     public Collection<Exam> findExamsUser(String userId){
         EntityManager em = emf.createEntityManager();
+       
         Query query;
         try{
             query = em.createNativeQuery("SELECT * FROM exam AS e INNER JOIN resultexam AS r ON r.idExam=e.examId WHERE (r.idUser=? && (e.realizationDate<=DATE_ADD(CURDATE(),INTERVAL 2 DAY) && e.realizationDate>CURDATE()));",Exam.class);
@@ -37,11 +38,14 @@ public class ExamDAO {
     
     public Collection<Exam> findAllExams() {
         EntityManager em = emf.createEntityManager();
+        
         Query query;
         try{
             query = em.createNamedQuery("Exam.findAll");
+            
             return (Collection<Exam>) query.getResultList();
         }catch(Exception e){
+            
             return null;
         }
     }

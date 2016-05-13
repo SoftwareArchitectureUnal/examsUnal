@@ -10,6 +10,7 @@
 <%@page import="co.unal.examsUnal.DataAccess.Entity.Exam"%>
 <%@page import="co.unal.examsUnal.BusinessLogic.Controller.Management.ExamController"%>
 <%@page import="java.util.Collection"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,6 +25,16 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/chart/Chart.min.js"></script>
     </head>
     <body>
+        <c:if test="${user!=null}">
+            <%
+                request.getRequestDispatcher("/user/index.jsp").forward(request, response);
+            %>
+        </c:if>
+        <c:if test="${admin==null}">
+            <%
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            %>
+        </c:if>
         <div class="modal fade modal-small" id="modal-deleted" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">

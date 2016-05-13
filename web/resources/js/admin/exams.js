@@ -59,7 +59,7 @@ $(document).ready(function() {
     $('#btn-save').click(function(){
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "insertExam",
                 name: $('#exam-name').val(),
@@ -73,7 +73,7 @@ $(document).ready(function() {
                 setTimeout(saved, 200);
             },
             error: function(msg,textStatus, errorThrown){
-                alert(errorThrown);
+                alert("algo1");
             }
         });
     });
@@ -86,7 +86,7 @@ $(document).ready(function() {
         $("#id-up").text(id);
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "findExam",
                 id: id
@@ -100,14 +100,14 @@ $(document).ready(function() {
                 $("#exam-description-up").val(exam[4]);
             },
             error: function(msg, textStatus, errorThrown){
-                alert(errorThrown);
+                alert("algo2");
             }
         });
     });
     $('#btn-update').click(function(){
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "updateExam",
                 id: $("#id-up").text(),
@@ -122,7 +122,7 @@ $(document).ready(function() {
                 setTimeout(updated, 200);
             },
             error: function(msg,textStatus, errorThrown){
-                alert(errorThrown);
+                alert("algo3");
             }
         });
     });
@@ -132,7 +132,7 @@ $(document).ready(function() {
     $('.btn-delete').click(function(){
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "deleteExam",
                 id: $(this).attr('id')
@@ -141,7 +141,7 @@ $(document).ready(function() {
                 $('#modal-deleted').modal();
             },
             error: function(msg,textStatus, errorThrown){
-                alert("Error "+errorThrown);
+                alert("algo4");
             }
         });
     });
@@ -179,7 +179,7 @@ $(document).ready(function() {
     
     $.ajax({
         type: "post",
-        url: "AdminExamsServlet",
+        url: "${pageContext.request.contextPath}/AdminExamsServlet",
         data: {
             method: "findAllExams"
         },
@@ -193,7 +193,7 @@ $(document).ready(function() {
             autocompleteExams(labelsComplete, categoriesComplete);    
         },
         error: function(msg,textStatus, errorThrown){
-            alert("Error "+errorThrown);
+            alert("algo5");
         }
     });
     
@@ -212,14 +212,14 @@ $(document).ready(function() {
         alert("hola");
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "grade"
             },
             success: function(){ 
             },
             error: function(msg,textStatus, errorThrown){
-                alert("Error "+errorThrown);
+                alert("algo6");
             }
         });
     });
@@ -231,7 +231,7 @@ $(document).ready(function() {
         else{
             $.ajax({
                 type: "post",
-                url: "AdminExamsServlet",
+                url: "${pageContext.request.contextPath}/AdminExamsServlet",
                 data: {
                     method: "examResult", 
                     id: selectedExam.split(" - ")[0]
@@ -247,7 +247,7 @@ $(document).ready(function() {
                     examChart(approved, failed);
                 },
                 error: function(msg,textStatus, errorThrown){
-                    alert("Error "+errorThrown);
+                    alert("algo7");
                 }
             });
         }
@@ -274,7 +274,7 @@ $(document).ready(function() {
         var examsFailed = [];
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "examsResults"
             },
@@ -288,7 +288,7 @@ $(document).ready(function() {
                 resultsChar(examNames, examsApproved, examsFailed);
             },
             error: function(msg,textStatus, errorThrown){
-                alert("Error "+errorThrown);
+                alert("algo8");
             }
         });
     });
@@ -303,7 +303,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "examsRegistered"
             },
@@ -316,7 +316,7 @@ $(document).ready(function() {
                 registeredChar(examNamesRegistered, examsRegistered);
             },
             error: function(msg,textStatus, errorThrown){
-                alert("Error "+errorThrown);
+                alert("algo9");
             }
         });
     });
@@ -328,7 +328,7 @@ $(document).ready(function() {
         var examsFailed = [];
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "examsResults"
             },
@@ -342,7 +342,7 @@ $(document).ready(function() {
                 resultsChar(examNames, examsApproved, examsFailed);
             },
             error: function(msg,textStatus, errorThrown){
-                alert("Error "+errorThrown);
+                alert("algo10");
             }
         });
     }

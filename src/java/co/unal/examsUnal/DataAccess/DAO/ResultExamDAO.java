@@ -20,7 +20,7 @@ import javax.persistence.Query;
  * @author yeisondavid
  */
 public class ResultExamDAO {
-    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("ExamsUnalPU");
+    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ExamsUnalPU");
     
     public Collection<Resultexam>  findRelationByIdUser(String idUser)
     {
@@ -104,11 +104,15 @@ public class ResultExamDAO {
     public Collection<Resultexam> findAllRelation(){
         EntityManager em = emf.createEntityManager();
         Query query;
+       
         try{
+            
             query = em.createNamedQuery("Resultexam.findAll");
-            return (Collection<Resultexam>) query.getResultList();
+            Collection<Resultexam> a = (Collection<Resultexam>) query.getResultList();
+            return a;
         }catch(Exception e){
             System.out.println("Exception result " + e);
+            
             e.printStackTrace();
             return null;
         }

@@ -44,8 +44,10 @@ public class UserDAO {
             user = em.createNamedQuery("User.findByIdAuthentication",User.class)
                     .setParameter("idAuthentication", userId)
                     .getSingleResult();
-        }catch(Exception e){}
+        }catch(Exception e){
+        }
         finally{
+            
             return user;
         }
     }

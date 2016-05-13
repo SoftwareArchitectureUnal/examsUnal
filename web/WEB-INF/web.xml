@@ -9,6 +9,7 @@
             30
         </session-timeout>
     </session-config>
+    <distributable/>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>co.unal.examsUnal.Presentation.Servlets.LoginServlet</servlet-class>

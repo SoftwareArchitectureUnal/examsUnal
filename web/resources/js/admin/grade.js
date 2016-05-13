@@ -82,7 +82,7 @@ $(document).ready(function() {
     $('.check-grade').change(function() {
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "gradeExam",
                 data: this.id,
@@ -106,7 +106,7 @@ $(document).ready(function() {
         }
         $.ajax({
             type: "post",
-            url: "AdminExamsServlet",
+            url: "${pageContext.request.contextPath}/AdminExamsServlet",
             data: {
                 method: "disableExam",
                 data: this.id,

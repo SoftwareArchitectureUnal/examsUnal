@@ -140,7 +140,7 @@
                     <div class="modal-body">
                         <form  action="${pageContext.request.contextPath}/SignUpServlet" id="myForm" data-toggle="validator" class="form-signin" method="post">
                             <div class="input-group">
-                                <input type="text" id="inputUsername" name="inputUsername" class="form-control input-lg"
+                                <input type="text" id="inputUsername1" name="inputUsername1" class="form-control input-lg"
                                    placeholder="Nombre de usario" required autofocus>
                                 <div class="input-group-addon" style="background-color: #464D57; color: #fff;">
                                     <span class="glyphicon glyphicon-user"></span>

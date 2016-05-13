@@ -15,6 +15,9 @@ import co.unal.examsUnal.Utilities.Util.PostulateEmployeeResponseDto;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -38,6 +41,11 @@ public class PostulateEmployee {
         User myUser = myUserController.getUserByUserId(myEmployee.getDocument());
         if ( myUser == null )
             myUser = myUserController.register(myEmployee.getDocument(),myEmployee.getFirstName()+" "+myEmployee.getLastName(), myEmployee.getEmail(), "password", gender,"user",myEmployee.getDocument());
+        if(myUser == null){
+            result.setSuccess(false);
+            result.setErrorMessage("error in web service postulateEmployee, the email alerady exist in the db");
+            return result;
+        }
         ExamRegisterController myExamRC = new ExamRegisterController();
         ExamController myExamC = new ExamController();
         Exam myExam;
@@ -46,18 +54,19 @@ public class PostulateEmployee {
             for( String nameExam : parameter.getFeatures()  )
             {   
                 myExam = myExamC.findByName(nameExam.trim());
-                ExamRegisterController.unSubcribeExam( myUser.getIdAuthentication(), myExam.getExamId());
-                ExamRegisterController.RegisterExam( myUser, myExam);
+                myExamRC.unSubcribeExam( myUser.getIdAuthentication(), myExam.getExamId());
+                myExamRC.RegisterExam( myUser, myExam);
                 countFeatures++;
             }
             result.setSuccess(true);
             result.setErrorMessage("");
         }
-        catch(Exception e)
+        catch(NullPointerException e)
         {
             result.setSuccess(false);
-            result.setErrorMessage("error in web service postulateEmployee, feature was not found , added features:"+countFeatures);
+            result.setErrorMessage("error in web service postulateEmployee, feature was not found , added features:"+countFeatures +"-" + e);
         }
+        
         return result;
     }
 }
